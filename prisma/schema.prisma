@@ -32,6 +32,7 @@ model Post {
 model Char {
   id          Int      @id @default(autoincrement())
   name        String
+  prefix      String
   image       String
   description String
   color       String?

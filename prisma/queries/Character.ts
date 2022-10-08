@@ -53,4 +53,36 @@ export class Character extends Base {
     });
     return chars;
   }
+
+  public async createPost(
+    userId: Snowflake,
+    channelId: Snowflake,
+    charId: number,
+    guildId: Snowflake,
+    messageId: Snowflake,
+    contentLength: number
+  ): Promise<void> {
+    const char = await this.getOne(userId, charId);
+    if (char) {
+      await this.prisma.post.create({
+        data: {
+          authorId: userId,
+          channelId: channelId,
+          charId: char.id,
+          guildId: guildId,
+          messageId: messageId,
+        },
+      });
+      await this.prisma.char.update({
+        data: {
+          letters: {
+            increment: contentLength,
+          },
+        },
+        where: {
+          id: char.id,
+        },
+      });
+    }
+  }
 }

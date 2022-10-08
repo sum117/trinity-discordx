@@ -4,6 +4,7 @@ export enum ErrorMessage {
   CharacterNotCreated = "Seu/sua personagem não pôde ser criado(a).",
   CharacterNotFound = "Seu/sua personagem não pôde ser encontrado(a).",
   DatabaseError = "Ocorreu um erro no banco de dados. Entre no servidor de suporte e reporte o erro se você acreditar que ele é um bug.",
+  UnknownMessage = "Incapaz de deletar a mensagem inexistente."
 }
 
 export enum Feedback {

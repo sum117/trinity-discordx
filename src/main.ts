@@ -1,6 +1,7 @@
 import "dotenv/config";
 
 import { dirname, importx } from "@discordx/importer";
+import { NotBot } from "@discordx/utilities";
 import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
@@ -10,21 +11,19 @@ export const bot = new Client({
   // botGuilds: [(client) => client.guilds.cache.map((guild) => guild.id)],
 
   // Discord intents
+  guards: [NotBot],
   intents: [
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMembers,
     IntentsBitField.Flags.GuildMessages,
     IntentsBitField.Flags.GuildMessageReactions,
     IntentsBitField.Flags.GuildVoiceStates,
+    IntentsBitField.Flags.MessageContent,
   ],
-
-  // Debug logs are disabled in silent mode
   silent: false,
 
-  // Configuration for @SimpleCommand
-  simpleCommand: {
-    prefix: "!",
-  },
+  // Debug logs are disabled in silent mode
+
 });
 
 bot.once("ready", async () => {
