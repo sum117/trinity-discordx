@@ -4,8 +4,8 @@ export class Util {
       setTimeout(res, ms);
     });
 
-  public static random = (min: number, max: number): number =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
+  public static randomIndex = (arr: any[]): any =>
+    arr[Math.floor(Math.random() * arr.length)];
 
   public static titleCase = (str: string): string =>
     str
