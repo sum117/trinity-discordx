@@ -11,39 +11,53 @@ datasource db {
 }
 
 model User {
-  id String @id @unique
-  posts Post[]
+  id             String          @id @unique
+  posts          Post[]
+  chars          Char[]
   gifInteraction GifInteraction?
 }
 
 model Post {
   messageId String @id @unique
   channelId String
-  guildId String
+  guildId   String
 
   author User @relation(fields: [authorId], references: [id])
-  char Char @relation(fields: [charId], references: [id])
+  char   Char @relation(fields: [charId], references: [id])
 
-  charId Int
+  charId   Int
   authorId String
 }
 
 model Char {
-  id Int @id @default(autoincrement())
-  name String
-  image String
+  id          Int      @id @default(autoincrement())
+  name        String
+  image       String
   description String
-  letters String
-  posts Post[]
+  color       String?
+  letters     Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  title    CharTitle?
+  posts    Post[]
+  author   User       @relation(fields: [authorId], references: [id])
+  authorId String
+}
+
+model CharTitle {
+  name    String
+  iconURL String
+  char    Char   @relation(fields: [charId], references: [id])
+  charId  Int    @id @unique
 }
 
 model GifInteraction {
-  hugCount Int @default(0)
-  kissCount Int @default(0)
-  slapCount Int @default(0)
+  hugCount   Int @default(0)
+  kissCount  Int @default(0)
+  slapCount  Int @default(0)
   punchCount Int @default(0)
-  biteCount Int @default(0)
+  biteCount  Int @default(0)
 
-  user User @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
   userId String @id
 }

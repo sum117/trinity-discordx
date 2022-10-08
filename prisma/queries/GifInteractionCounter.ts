@@ -1,19 +1,19 @@
 import type { GifInteraction } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
 import type { User } from "discord.js";
 
-const prisma = new PrismaClient();
+import { Base } from "./Base";
 
-export class GifInteractionCounter {
+export class GifInteractionCounter extends Base {
   public constructor(
     private readonly user: User,
     private readonly target: User
   ) {
+    super();
     this.target = target;
     this.user = user;
   }
   public async get(which: "target" | "user"): Promise<GifInteraction | null> {
-    const interaction = await prisma.gifInteraction.findUnique({
+    const interaction = await this.prisma.gifInteraction.findUnique({
       where: {
         userId: this[which].id,
       },
@@ -24,7 +24,7 @@ export class GifInteractionCounter {
     whichUser: "target" | "user",
     value: keyof GifInteraction
   ): Promise<GifInteraction | null> {
-    const increment = await prisma.gifInteraction.upsert({
+    const increment = await this.prisma.gifInteraction.upsert({
       create: {
         user: {
           connectOrCreate: {

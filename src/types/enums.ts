@@ -30,3 +30,11 @@ export enum CommandInfo {
   InteractSlap = "Dá um tapa em um(a) usuário(a).",
   InteractUserOption = "Usuário(a) que você deseja interagir.",
 }
+
+export enum CharEmbedField {
+  CreatedAt = "Criado em",
+  LetterCount = "Total de Caracteres",
+  Name = "Nome",
+  Posts = "Quantia de Posts",
+  Title = "Título",
+}
