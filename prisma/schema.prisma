@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @unique
+  posts Post[]
+  gifInteraction GifInteraction?
+}
+
+model Post {
+  messageId String @id @unique
+  channelId String
+  guildId String
+
+  author User @relation(fields: [authorId], references: [id])
+  char Char @relation(fields: [charId], references: [id])
+
+  charId Int
+  authorId String
+}
+
+model Char {
+  id Int @id @default(autoincrement())
+  name String
+  image String
+  description String
+  letters String
+  posts Post[]
+}
+
+model GifInteraction {
+  hugCount Int @default(0)
+  kissCount Int @default(0)
+  slapCount Int @default(0)
+  punchCount Int @default(0)
+  biteCount Int @default(0)
+
+  user User @relation(fields: [userId], references: [id])
+  userId String @id
+}
