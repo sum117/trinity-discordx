@@ -34,7 +34,7 @@ model Char {
   name        String
   prefix      String
   image       String
-  description String
+  description String?
   music       String?
   color       String?
 

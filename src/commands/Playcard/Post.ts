@@ -19,12 +19,12 @@ export class Playcard {
     const attachments =
       message.attachments.size > 0
         ? message.attachments.map((attachment, index) => {
-          const extension = attachment.name?.split(".").pop();
-          const attachmentName = `image_${index}.${extension ?? "png"}`;
-          return new AttachmentBuilder(attachment.attachment).setName(
-            attachmentName
-          );
-        })
+            const extension: string = attachment.name?.split(".").pop() ?? "";
+            const attachmentName = `image_${index}.${extension ?? "png"}`;
+            return new AttachmentBuilder(attachment.attachment).setName(
+              attachmentName
+            );
+          })
         : undefined;
 
     const characters = new Character();

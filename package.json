@@ -13,7 +13,8 @@
     "watch": "nodemon --exec ts-node-esm src/main.ts",
     "prisma-migrate": "npx prisma migrate dev --name init",
     "prisma-studio": "npx prisma studio --port 23563",
-    "lint": "prettier --write . && eslint src --ext .ts --fix"
+    "lint": "prettier --write . && eslint src --ext .ts --fix",
+    "updates": "npx npm-check-updates"
   },
   "dependencies": {
     "@discordx/importer": "^1.1.10",
