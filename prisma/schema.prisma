@@ -30,14 +30,17 @@ model Post {
 }
 
 model Char {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   prefix      String
   image       String
   description String
+  music       String?
   color       String?
-  letters     Int      @default(0)
-  createdAt   DateTime @default(now())
+
+  letters   Int      @default(0)
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
 
   title    CharTitle?
   posts    Post[]

@@ -13,11 +13,12 @@ export class CharEmbedBuilder extends EmbedBuilder {
 
     this.setTitle(char.name);
     this.setThumbnail(char?.image);
-    this.setColor(char.color as ColorResolvable);
+    this.setColor((char.color as ColorResolvable) ?? null);
     this.setFooter({
       iconURL: owner.displayAvatarURL({ size: 128 }),
       text: owner.username,
     });
+    this.setURL(char.music ?? null);
     this.setTimestamp(Date.now());
   }
 
@@ -45,6 +46,7 @@ export class CharEmbedBuilder extends EmbedBuilder {
   public profile(): this {
     this.setThumbnail(null);
     this.setTitle(null);
+    this.setURL(null);
     this.setImage(this.char.image);
     this.addFields([
       { inline: true, name: CharEmbedField.Name, value: this.char.name },
@@ -60,6 +62,9 @@ export class CharEmbedBuilder extends EmbedBuilder {
       },
       { inline: true, name: CharEmbedField.CreatedAt, value: this._getTime() },
     ]);
+    if (this.char.music) {
+      this.addFields({ name: CharEmbedField.Music, value: this.char.music });
+    }
     return this;
   }
 }

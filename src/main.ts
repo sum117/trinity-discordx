@@ -23,7 +23,6 @@ export const bot = new Client({
   silent: false,
 
   // Debug logs are disabled in silent mode
-
 });
 
 bot.once("ready", async () => {
