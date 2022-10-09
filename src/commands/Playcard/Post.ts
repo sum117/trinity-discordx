@@ -7,6 +7,7 @@ import { Character } from "../../../prisma/queries/Character";
 import { CharEmbedBuilder } from "../../components/CharEmbed";
 import { ErrorMessage } from "../../types/enums";
 import type { MultiPostMessageOptions } from "../../types/interfaces";
+import { Util } from "../../util/Util";
 
 @Discord()
 export class Playcard {
@@ -60,35 +61,36 @@ export class Playcard {
           return reply;
         }
       });
-      // Send in order of matches
-      replies
-        .sort((a, b) => {
-          if (a?.index && b?.index) {
-            return a.index - b.index;
+      // Send in order of matches by index
+      const sorted = replies.sort((a, b) => {
+        if (a?.index && b?.index) {
+          return a?.index - b?.index;
+        }
+        return 0;
+      });
+      sorted.forEach(async (reply, index) => {
+        // Delay each message by 200ms to prevent weird Discord behavior
+        await Util.delay(index * 200);
+        if (reply) {
+          const sentMessage = await message.channel.send(reply);
+          if (sentMessage.inGuild()) {
+            await characters.createPost(
+              message.author.id,
+              sentMessage.channelId,
+              reply.characterId,
+              sentMessage.guildId,
+              sentMessage.id,
+              sentMessage.content.length
+            );
           }
-          return 0;
-        })
-        .forEach(async (reply, index) => {
-          if (reply) {
-            const sentMessage = await message.channel.send(reply);
-            if (sentMessage.inGuild()) {
-              await characters.createPost(
-                sentMessage.author.id,
-                sentMessage.channelId,
-                reply.characterId,
-                sentMessage.guildId,
-                sentMessage.id,
-                sentMessage.content.length
-              );
-            }
-            // Delete the original message when the replies are sent.
-            if (index === replies.length - 1) {
-              await message.delete().catch(() => {
-                return console.log(ErrorMessage.UnknownMessage);
-              });
-            }
+          // Delete the original message when the replies are sent.
+          if (index === replies.length - 1) {
+            await message.delete().catch(() => {
+              return console.log(ErrorMessage.UnknownMessage);
+            });
           }
-        });
+        }
+      });
     }
   }
 }
