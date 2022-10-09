@@ -13,7 +13,9 @@ export class CharEmbedBuilder extends EmbedBuilder {
 
     this.setTitle(char.name);
     this.setThumbnail(char?.image);
-    this.setColor((char.color as ColorResolvable) ?? null);
+    if (char.color) {
+      this.setColor(char.color as ColorResolvable);
+    }
     this.setFooter({
       iconURL: owner.displayAvatarURL({ size: 128 }),
       text: owner.username,

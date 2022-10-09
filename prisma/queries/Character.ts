@@ -7,6 +7,73 @@ export class Character extends Base {
   constructor() {
     super();
   }
+
+  public async createChar(
+    userId: Snowflake,
+    name: string,
+    prefix: string,
+    image: string,
+    description?: string,
+    color?: string
+  ): Promise<Char> {
+    const author = await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+    if (!author) {
+      await this.prisma.user.create({
+        data: {
+          id: userId,
+        },
+      });
+    }
+    const char = await this.prisma.char.create({
+      data: {
+        authorId: userId,
+        color: color,
+        description: description,
+        image: image,
+        name: name,
+        prefix: prefix,
+      },
+    });
+    return char;
+  }
+  public async deleteChar(userId: Snowflake, charId: number): Promise<void> {
+    const char = await this.getOne(userId, charId);
+    const posts = await this.prisma.post.findMany({
+      where: {
+        charId: charId,
+      },
+    });
+    const title = await this.prisma.charTitle.findFirst({
+      where: {
+        charId: charId,
+      },
+    });
+    if (char) {
+      if (posts) {
+        await this.prisma.post.deleteMany({
+          where: {
+            charId: charId,
+          },
+        });
+      }
+      if (title) {
+        await this.prisma.charTitle.delete({
+          where: {
+            charId: charId,
+          },
+        });
+      }
+      await this.prisma.char.delete({
+        where: {
+          id: charId,
+        },
+      });
+    }
+  }
   public async getOne(
     userId: Snowflake,
     charId: number

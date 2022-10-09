@@ -1,3 +1,7 @@
+import type { AutocompleteInteraction } from "discord.js";
+
+import { Character } from "../../prisma/queries/Character";
+
 export class Util {
   public static delay = (ms: number): Promise<void> =>
     new Promise((res) => {
@@ -17,4 +21,33 @@ export class Util {
     fetch("https://hastebin.com/documents", { body: str, method: "POST" })
       .then((res) => res.json())
       .then((body) => `https://hastebin.com/raw/${body.key}`);
+
+  public static hexColorValidator = (color: string): boolean => {
+    const reg = /^#([0-9A-F]{3}){1,2}$/i;
+    return reg.test(color);
+  };
+
+  public static imageValidator = (url: string): boolean => {
+    const reg = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+    return reg.test(url);
+  };
+
+  public static getCharAutoComplete = (
+    interaction: AutocompleteInteraction
+  ): void => {
+    new Character().getAll(interaction.user.id).then((chars) => {
+      const charSelector = chars.map((char) => {
+        if (!char) {
+          return { name: "N/A", value: 0 };
+        }
+        const formattedCharName =
+          char.name.length > 100 ? char.name.slice(0, 94) + "..." : char.name;
+        return {
+          name: formattedCharName,
+          value: char.id,
+        };
+      });
+      interaction.respond(charSelector);
+    });
+  };
 }
