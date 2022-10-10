@@ -14,6 +14,7 @@ export enum ErrorMessage {
   NotPostOwner = "Você não é o(a) dono(a) da mensagem ou ela não é elegível para ser deletada. Não é possível deletá-la ou editá-la.",
   Prefix = "O prefixo do(a) seu/sua personagem já existe em algum outro personagem seu.",
   UnknownChannel = "Incapaz de encontrar o canal da mensagem. Verifique se o canal ainda existe.",
+  CannotLikeMessage = "Você não pode dar like em uma mensagem.",
   UnknownMessage = "Incapaz de deletar ou editar a mensagem inexistente.",
 }
 
@@ -21,7 +22,7 @@ export enum Feedback {
   Bite = "**{user} mordeu {target}**\n{target} foi mordido(a) {counter} vezes.",
   CharacterCreated = "Seu/Sua personagem foi criado com sucesso.",
   CharacterDeleted = "Seu/Sua personagem foi excluído com sucesso.",
-  CharacterLiked = "❤️ Você deu neste personagem!",
+  CharacterLiked = "❤️ Você deu uma curtida neste personagem!",
   CharacterUpdateMenu = "Atualizando o(a) personagem de {character} de {user}.",
   CharacterUpdated = "Seu/Sua personagem foi atualizado com sucesso.",
   DisplayProfile = "Exibindo perfil do(a) personagem {character} de {user}.",
@@ -71,7 +72,7 @@ export enum CharEmbedField {
 }
 export enum HelpEmbed {
   Title = 'Comandos do Trinity',
-  Roleplay = "Para usar seu personagem simplesmente use seu prefixo com um `:` após ele e o texto logo em seguida. É possível utilizar vários personagens em uma mensagem só.",
+  Roleplay = "Para usar seu personagem simplesmente use seu prefixo com um `:` após ele e o texto logo em seguida. É possível utilizar vários personagens em uma mensagem só.\n\nExemplo: `fulano: olá, mundo!`",
   FooterText = "❤️ Um bot feito com muito amor por um desenvolvedor apaixonado por fantasia.",
   Color = "#36393e"
 }

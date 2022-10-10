@@ -1,9 +1,11 @@
-import type {
+import {
   APIButtonComponent,
+  ApplicationCommandType,
   ButtonInteraction,
   CommandInteraction,
   InteractionResponse,
   Message,
+  MessageContextMenuCommandInteraction,
 } from "discord.js";
 import {
   ActionRowBuilder,
@@ -14,6 +16,7 @@ import {
 } from "discord.js";
 import {
   ButtonComponent,
+  ContextMenu,
   Discord,
   Slash,
   SlashGroup,
@@ -100,7 +103,7 @@ export class Playcard {
     // Manage like
     const likedChar = await characters.addLike(charId, interaction.user.id);
     if (!likedChar) {
-      return interaction.editReply({
+      return interaction.followUp({
         content: ErrorMessage.AlreadyLiked,
       });
     }
@@ -118,5 +121,51 @@ export class Playcard {
       content: feedback,
       embeds: [embed],
     });
+  }
+
+  @ContextMenu({
+    name: "Like this character",
+    type:ApplicationCommandType.Message
+  })
+  public async likeContext(interaction: MessageContextMenuCommandInteraction) {
+    const embedFooterText = interaction.targetMessage.embeds?.[0]?.footer?.text;
+    if (!embedFooterText) {
+      return interaction.reply({
+        content: ErrorMessage.CannotLikeMessage,
+        ephemeral: true,
+      });
+    }
+    const idRegex = new RegExp(/ID: #(\d+)/);
+    const charId = parseInt(embedFooterText.match(idRegex)?.[1] ?? "");
+    if (!charId) {
+      return interaction.reply({
+        content: ErrorMessage.CannotLikeMessage,
+        ephemeral: true,
+      });
+    }
+    const characters = new Character();
+    const character = await characters.getOne(
+      interaction.user.id,
+      charId,
+      false
+    );
+    if (!character) {
+      return interaction.reply({
+        content: ErrorMessage.CharacterNotFound,
+        ephemeral: true,
+      });
+    }
+    const likedChar = await characters.addLike(charId, interaction.user.id);
+    if (!likedChar) {
+      return interaction.reply({
+        content: ErrorMessage.AlreadyLiked,
+        ephemeral: true,
+      });
+    }
+    return interaction.reply({
+      content: Feedback.CharacterLiked,
+      ephemeral: true,
+    });
+
   }
 }
