@@ -42,7 +42,6 @@ bot.once("ready", async () => {
 
   console.log("Bot started");
 });
-
 bot.on("interactionCreate", (interaction: Interaction) => {
   bot.executeInteraction(interaction);
 });
@@ -50,6 +49,17 @@ bot.on("interactionCreate", (interaction: Interaction) => {
 bot.on("messageCreate", (message: Message) => {
   bot.executeCommand(message);
 });
+
+// Error Handling
+bot.on('error', (error: Error) => {
+  console.error(error)
+})
+process.on('rejectionHandled', (error: Error) => {
+  console.error(error)
+})
+process.on('unhandledRejection', (error: Error) => {
+  console.log(error)
+})
 
 async function run() {
   // The following syntax should be used in the commonjs environment
