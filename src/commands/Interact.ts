@@ -103,11 +103,9 @@ export class Interact {
     const { interactionName, target, user } = options;
 
     const counters = new GifInteractionCounter(user, target);
-    const counter = await counters.get("target");
-
     const counterString = `${interactionName}Count` as keyof GifInteraction;
+    const counter = await counters.increment("target", counterString);
     const counterValue = (counter?.[counterString] ?? 0).toString();
-    await counters.increment("target", counterString);
     const embed = new EmbedBuilder();
     const reply = Feedback[
       Util.titleCase(interactionName) as keyof typeof Feedback

@@ -34,8 +34,10 @@ export class GifInteractionCounter extends Base {
             where: {
               id: this[whichUser].id,
             },
+
           },
         },
+        [value]: 1,
       },
       update: {
         [value]: {

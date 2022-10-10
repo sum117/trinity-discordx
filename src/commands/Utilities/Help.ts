@@ -8,14 +8,18 @@ export class Utilities {
     @Slash({ name: 'help', description: CommandInfo.Help })
     public help(interaction: CommandInteraction) {
         const getHelpFormat = (commandName: string, commandDescription: string) => `${inlineCode('/' + commandName)}: ${commandDescription}`;
-        const commands = MetadataStorage.instance.applicationCommandSlashes.map(command => getHelpFormat(command.name, command.description)).join('\n');
+        const commands = MetadataStorage.instance.applicationCommandSlashes.map(command => getHelpFormat(command.name, command.description));
+
+        // check if commands are duplicated
+        const uniqueCommands = [...new Set(commands)].join('\n');
+
         const helpEmbed = new EmbedBuilder()
             .setTitle(HelpEmbed.Title)
             .setColor(HelpEmbed.Color)
             .setFooter({
                 text: HelpEmbed.FooterText
             })
-            .setDescription(HelpEmbed.Roleplay + '\n\n' + commands)
+            .setDescription(HelpEmbed.Roleplay + '\n\n' + uniqueCommands)
             .setThumbnail(interaction.client.user.displayAvatarURL({ size: 512 }))
 
         interaction.reply({

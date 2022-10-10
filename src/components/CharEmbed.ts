@@ -18,7 +18,7 @@ export class CharEmbedBuilder extends EmbedBuilder {
     }
     this.setFooter({
       iconURL: owner.displayAvatarURL({ size: 128 }),
-      text: owner.username + "| ID: #" + char.id,
+      text: owner.username + " | ID: #" + char.id,
     });
     this.setURL(char.music ?? null);
     this.setTimestamp(Date.now());
