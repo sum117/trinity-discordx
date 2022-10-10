@@ -73,7 +73,7 @@ export class CharEmbedBuilder extends EmbedBuilder {
       {
         inline: true,
         name: CharEmbedField.Likes,
-        value: this.char.likes.toString(),
+        value: JSON.parse(this.char.likes)?.length?.toString() ?? "0",
       },
     ]);
     if (this.char.music) {

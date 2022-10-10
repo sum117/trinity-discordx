@@ -33,7 +33,8 @@ export class Util {
   };
 
   public static youtubeValidator = (url: string): boolean => {
-    const reg = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+    const reg =
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
     return reg.test(url);
   };
 

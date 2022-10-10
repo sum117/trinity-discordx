@@ -39,7 +39,7 @@ model Char {
   color       String?
 
   letters   Int      @default(0)
-  likes     Int      @default(0)
+  likes     String   @default("[]")
   createdAt DateTime @default(now())
 
   title    CharTitle?

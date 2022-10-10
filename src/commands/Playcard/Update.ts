@@ -168,104 +168,110 @@ export class Playcard {
   public async updateModal(
     interaction: ModalSubmitInteraction
   ): Promise<InteractionResponse<boolean>> {
-      const [option, charId] = interaction.customId
-        .replace("char_update_modal_", "")
-        .split("_");
-      const characterDatabase = new Character();
+    const [option, charId] = interaction.customId
+      .replace("char_update_modal_", "")
+      .split("_");
+    const characterDatabase = new Character();
 
-      if (option === "title") {
-        const [title, titleIcon] = [
-          "char_update_modal_title_name",
-          "char_update_modal_title_icon",
-        ].map((customId) => interaction.fields.getTextInputValue(customId));
-        const imageExists = Util.imageValidator(titleIcon);
-        if (!imageExists) {
-          return interaction.reply({
-              content: ErrorMessage.Image,
-              ephemeral: true,
-          });
-        }
-        const updatedChar = await characterDatabase.updateChar(
-          interaction.user.id,
-          Number(charId),
-          {
-            title: {
-              iconURL: titleIcon,
-              name: title,
-            },
-          }
-        );
-        if (!updatedChar) {
-          return interaction.reply({content: ErrorMessage.DatabaseError, ephemeral: true});
-        }
-        const embed = new CharEmbedBuilder(
-          interaction.user,
-          updatedChar
-        ).profile();
+    if (option === "title") {
+      const [title, titleIcon] = [
+        "char_update_modal_title_name",
+        "char_update_modal_title_icon",
+      ].map((customId) => interaction.fields.getTextInputValue(customId));
+      const imageExists = Util.imageValidator(titleIcon);
+      if (!imageExists) {
         return interaction.reply({
-          content: Feedback.CharacterUpdated,
-          embeds: [embed],
+          content: ErrorMessage.Image,
           ephemeral: true,
         });
-      }
-
-      if (option === "color") {
-        const colorExists = Util.hexColorValidator(
-          interaction.fields.getTextInputValue(interaction.customId)
-        );
-        if (!colorExists) {
-          return interaction.reply({
-              content: ErrorMessage.Color,
-              ephemeral: true
-          });
-        }
-      } else if (option === "image") {
-        const imageExists = Util.imageValidator(
-          interaction.fields.getTextInputValue(interaction.customId)
-        );
-        if (!imageExists) {
-          return interaction.reply({
-              content: ErrorMessage.Image,
-              ephemeral: true
-          });
-        }
-      } else if (option === "music") {
-          const musicExists = Util.youtubeValidator(
-              interaction.fields.getTextInputValue(interaction.customId)
-          );
-          if (!musicExists) {
-              return interaction.reply({
-                  content: ErrorMessage.Music,
-                  ephemeral: true
-              });
-          }
-      } else if (option === "prefix") {
-          const prefix = interaction.fields.getTextInputValue(interaction.customId);
-          const prefixExists = (await characterDatabase.getAll(interaction.user.id))
-          .map((char) => char.prefix)
-              .includes(prefix);
-          if (prefixExists) {
-              return interaction.reply({
-                  content: ErrorMessage.Prefix,
-                  ephemeral: true
-              });
-          }
       }
       const updatedChar = await characterDatabase.updateChar(
         interaction.user.id,
         Number(charId),
         {
-          [option]: interaction.fields.getTextInputValue(interaction.customId),
+          title: {
+            iconURL: titleIcon,
+            name: title,
+          },
         }
       );
       if (!updatedChar) {
-        return interaction.reply({content: ErrorMessage.DatabaseError, ephemeral: true});
+        return interaction.reply({
+          content: ErrorMessage.DatabaseError,
+          ephemeral: true,
+        });
       }
-      const embed = new CharEmbedBuilder(interaction.user, updatedChar).profile();
+      const embed = new CharEmbedBuilder(
+        interaction.user,
+        updatedChar
+      ).profile();
       return interaction.reply({
         content: Feedback.CharacterUpdated,
         embeds: [embed],
         ephemeral: true,
       });
+    }
+
+    if (option === "color") {
+      const colorExists = Util.hexColorValidator(
+        interaction.fields.getTextInputValue(interaction.customId)
+      );
+      if (!colorExists) {
+        return interaction.reply({
+          content: ErrorMessage.Color,
+          ephemeral: true,
+        });
+      }
+    } else if (option === "image") {
+      const imageExists = Util.imageValidator(
+        interaction.fields.getTextInputValue(interaction.customId)
+      );
+      if (!imageExists) {
+        return interaction.reply({
+          content: ErrorMessage.Image,
+          ephemeral: true,
+        });
+      }
+    } else if (option === "music") {
+      const musicExists = Util.youtubeValidator(
+        interaction.fields.getTextInputValue(interaction.customId)
+      );
+      if (!musicExists) {
+        return interaction.reply({
+          content: ErrorMessage.Music,
+          ephemeral: true,
+        });
+      }
+    } else if (option === "prefix") {
+      const prefix = interaction.fields.getTextInputValue(interaction.customId);
+      const prefixExists = (await characterDatabase.getAll(interaction.user.id))
+        .map((char) => char.prefix)
+        .includes(prefix);
+      if (prefixExists) {
+        return interaction.reply({
+          content: ErrorMessage.Prefix,
+          ephemeral: true,
+        });
+      }
+    }
+    const updatedChar = await characterDatabase.updateChar(
+      interaction.user.id,
+      Number(charId),
+      {
+        [option]: interaction.fields.getTextInputValue(interaction.customId),
+      }
+    );
+    if (!updatedChar) {
+      return interaction.reply({
+        content: ErrorMessage.DatabaseError,
+        ephemeral: true,
+      });
+    }
+    const embed = new CharEmbedBuilder(interaction.user, updatedChar).profile();
+    return interaction.reply({
+      content: Feedback.CharacterUpdated,
+      embeds: [embed],
+      ephemeral: true,
+    });
   }
 }

@@ -1,7 +1,10 @@
 import type { Char, CharTitle, Post } from "@prisma/client";
 import type { Snowflake } from "discord.js";
 
-import type { CharProfileQueryOptions, CharUpdateOptions } from "../../src/types/interfaces";
+import type {
+  CharProfileQueryOptions,
+  CharUpdateOptions,
+} from "../../src/types/interfaces";
 import { Base } from "./Base";
 
 export class Character extends Base {
@@ -86,7 +89,7 @@ export class Character extends Base {
       })
     | null
     | null
-    > {
+  > {
     let where: CharProfileQueryOptions = {
       id: charId,
     };
@@ -108,10 +111,10 @@ export class Character extends Base {
         title: true,
       },
       where: where,
-
     });
     return char;
   }
+
   public async getAll(userId: Snowflake): Promise<
     (Char & {
       posts: Post[];
@@ -129,7 +132,46 @@ export class Character extends Base {
     });
     return chars;
   }
-
+  public async addLike(
+    targetCharId: number,
+    userId: Snowflake
+  ): Promise<
+    | (Char & {
+        posts: Post[];
+        title: CharTitle | null;
+      })
+    | void
+  > {
+    const currentLikes = await this.prisma.char.findFirst({
+      select: {
+        likes: true,
+      },
+      where: {
+        id: targetCharId,
+      },
+    });
+    if (!currentLikes) {
+      return;
+    }
+    const parsedLikes: Array<string> = JSON.parse(currentLikes?.likes);
+    if (parsedLikes.includes(userId)) {
+      return;
+    }
+    parsedLikes.push(userId);
+    const updatedChar = await this.prisma.char.update({
+      data: {
+        likes: JSON.stringify(parsedLikes),
+      },
+      include: {
+        posts: true,
+        title: true,
+      },
+      where: {
+        id: targetCharId,
+      },
+    });
+    return updatedChar;
+  }
   public async createPost(
     userId: Snowflake,
     channelId: Snowflake,
@@ -181,10 +223,13 @@ export class Character extends Base {
     userId: Snowflake,
     charId: number,
     options: CharUpdateOptions
-  ): Promise<(Char & {
-    posts: Post[];
-    title: CharTitle | null;
-  })| void> {
+  ): Promise<
+    | (Char & {
+        posts: Post[];
+        title: CharTitle | null;
+      })
+    | void
+  > {
     const char = await this.getOne(userId, charId);
     if (char) {
       if (options.title?.name && options.title?.iconURL) {
@@ -220,7 +265,6 @@ export class Character extends Base {
         where: {
           id: charId,
         },
-
       });
       return updatedChar;
     }

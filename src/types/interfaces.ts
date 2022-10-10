@@ -12,13 +12,14 @@ export interface MultiPostMessageOptions extends BaseMessageOptions {
 }
 
 export interface CharProfileQueryOptions {
-  AND?: [{
-    authorId?: string;
-
-  },
+  AND?: [
     {
-    id?: number;
-    }];
+      authorId?: string;
+    },
+    {
+      id?: number;
+    }
+  ];
   id?: number;
 }
 

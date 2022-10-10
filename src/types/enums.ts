@@ -1,4 +1,5 @@
 export enum ErrorMessage {
+  AlreadyLiked = "Você já deu like nesse personagem.",
   CharacterInvalidImage = "A imagem do(a) seu/sua personagem não é válida.",
   CharacterInvalidName = "O nome do(a) seu/sua personagem não é válido.",
   CharacterNotCreated = "Seu/sua personagem não pôde ser criado(a).",
@@ -20,6 +21,7 @@ export enum Feedback {
   Bite = "**{user} mordeu {target}**\n{target} foi mordido(a) {counter} vezes.",
   CharacterCreated = "Seu/Sua personagem foi criado com sucesso.",
   CharacterDeleted = "Seu/Sua personagem foi excluído com sucesso.",
+  CharacterLiked = "❤️ Você deu neste personagem!",
   CharacterUpdateMenu = "Atualizando o(a) personagem de {character} de {user}.",
   CharacterUpdated = "Seu/Sua personagem foi atualizado com sucesso.",
   DisplayProfile = "Exibindo perfil do(a) personagem {character} de {user}.",
@@ -106,4 +108,9 @@ export enum CharUpdateButtonLabel {
   Name = "Nome",
   Prefix = "Prefixo",
   Title = "Título",
+}
+
+export enum CharLikeButton {
+  Emoji = "👍",
+  Like = "Curtir",
 }
