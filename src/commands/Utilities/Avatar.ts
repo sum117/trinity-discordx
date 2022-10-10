@@ -5,8 +5,9 @@ import type {
 } from "discord.js";
 import { ApplicationCommandOptionType, EmbedBuilder } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
+import { CommandInfo } from "../../types/enums";
 
-import { CommandInfo } from "../types/enums";
+
 
 @Discord()
 export class Utilities {

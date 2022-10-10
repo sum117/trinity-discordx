@@ -57,6 +57,7 @@ export enum CommandInfo {
   ProfileCharOption = "Personagem que você deseja ver o perfil.",
   Update = "Atualiza um personagem.",
   UpdateCharOption = "Personagem que você deseja atualizar.",
+  Help = 'Obtenha a lista de comandos do Trinity.'
 }
 
 export enum CharEmbedField {
@@ -67,6 +68,12 @@ export enum CharEmbedField {
   Name = "Nome",
   Posts = "Quantia de Posts",
   Title = "Título",
+}
+export enum HelpEmbed {
+  Title = 'Comandos do Trinity',
+  Roleplay = "Para usar seu personagem simplesmente use seu prefixo com um `:` após ele e o texto logo em seguida. É possível utilizar vários personagens em uma mensagem só.",
+  FooterText = "❤️ Um bot feito com muito amor por um desenvolvedor apaixonado por fantasia.",
+  Color = "#36393e"
 }
 export enum TrinityModalTitle {
   CreateChar = "Criar Personagem",
