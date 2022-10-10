@@ -18,7 +18,7 @@ export class CharEmbedBuilder extends EmbedBuilder {
     }
     this.setFooter({
       iconURL: owner.displayAvatarURL({ size: 128 }),
-      text: owner.username,
+      text: owner.username + "| ID: #" + char.id,
     });
     this.setURL(char.music ?? null);
     this.setTimestamp(Date.now());
@@ -35,8 +35,8 @@ export class CharEmbedBuilder extends EmbedBuilder {
     );
     return time;
   }
-  public post(description: string): this {
-    this.setDescription(description);
+  public post(post: string): this {
+    this.setDescription(post);
     if (this.char?.title?.name && this.char?.title?.iconURL) {
       this.setAuthor({
         iconURL: this.char.title.iconURL,
@@ -46,11 +46,18 @@ export class CharEmbedBuilder extends EmbedBuilder {
     return this;
   }
   public profile(): this {
+    if (this.char?.title?.name && this.char?.title?.iconURL) {
+      this.setAuthor({
+        iconURL: this.char.title.iconURL,
+        name: this.char.title.name,
+      });
+    }
     this.setThumbnail(null);
     this.setTitle(null);
     this.setURL(null);
     this.setImage(this.char.image);
     this.addFields([
+      { inline: true, name: "ID", value: "#" + this.char.id },
       { inline: true, name: CharEmbedField.Name, value: this.char.name },
       {
         inline: true,
@@ -63,9 +70,17 @@ export class CharEmbedBuilder extends EmbedBuilder {
         value: this.char.letters.toString(),
       },
       { inline: true, name: CharEmbedField.CreatedAt, value: this._getTime() },
+      {
+        inline: true,
+        name: CharEmbedField.Likes,
+        value: this.char.likes.toString(),
+      },
     ]);
     if (this.char.music) {
       this.addFields({ name: CharEmbedField.Music, value: this.char.music });
+    }
+    if (this.char.description) {
+      this.setDescription(this.char.description);
     }
     return this;
   }

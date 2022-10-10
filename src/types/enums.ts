@@ -7,7 +7,8 @@ export enum ErrorMessage {
   ColorImage = "Por favor insira uma cor válida e uma imagem válida. A cor deve conter # no começo e 6 caracteres hexadecimais. A imagem deve ser um link direto para a imagem.",
   DatabaseError = "Ocorreu um erro no banco de dados. Entre no servidor de suporte e reporte o erro se você acreditar que ele é um bug.",
   FetchError = "Ocorreu um erro ao buscar a mensagem. ",
-  Image = "Por favor insira uma imagem válida. Ela deve conter http(s):// no começo e terminar com .jpg, .png ou .gif.",
+  Image = "Por favor insira um link de imagem válido. Ela deve conter http(s):// no começo e terminar com .jpg, .png ou .gif.",
+  Music = "Por favor insira um link do youtube válido.",
   NoEditContent = "Você não forneceu um conteúdo para editar a mensagem.",
   NotPostOwner = "Você não é o(a) dono(a) da mensagem ou ela não é elegível para ser deletada. Não é possível deletá-la ou editá-la.",
   Prefix = "O prefixo do(a) seu/sua personagem já existe em algum outro personagem seu.",
@@ -19,7 +20,9 @@ export enum Feedback {
   Bite = "**{user} mordeu {target}**\n{target} foi mordido(a) {counter} vezes.",
   CharacterCreated = "Seu/Sua personagem foi criado com sucesso.",
   CharacterDeleted = "Seu/Sua personagem foi excluído com sucesso.",
+  CharacterUpdateMenu = "Atualizando o(a) personagem de {character} de {user}.",
   CharacterUpdated = "Seu/Sua personagem foi atualizado com sucesso.",
+  DisplayProfile = "Exibindo perfil do(a) personagem {character} de {user}.",
   Hug = "**{user} abraçou {target}**\n{target} foi abraçado(a) {counter} vezes.",
   Kiss = "**{user} beijou {target}**\n{target} foi beijado(a) {counter} vezes.",
   MessageEditted = "Mensagem editada com sucesso.",
@@ -48,11 +51,16 @@ export enum CommandInfo {
   InteractUserOption = "Usuário(a) que você deseja interagir.",
   ManagePlaycard = "Comandos de gerenciamento dos personagens.",
   Playcard = "Comandos relacionados ao sistema de personagens.",
+  Profile = "Mostra o perfil de um personagem.",
+  ProfileCharOption = "Personagem que você deseja ver o perfil.",
+  Update = "Atualiza um personagem.",
+  UpdateCharOption = "Personagem que você deseja atualizar.",
 }
 
 export enum CharEmbedField {
-  CreatedAt = "Criado em",
+  CreatedAt = "Criado",
   LetterCount = "Total de Caracteres",
+  Likes = "Curtidas",
   Music = "Link da música",
   Name = "Nome",
   Posts = "Quantia de Posts",
@@ -60,13 +68,17 @@ export enum CharEmbedField {
 }
 export enum TrinityModalTitle {
   CreateChar = "Criar Personagem",
+  UpdateChar = "Atualizar Personagem",
 }
 export enum CharModalLabel {
   Color = "Cor",
   Description = "Descrição",
   Image = "Imagem",
+  Music = "Música",
   Name = "Nome",
   Prefix = "Prefixo",
+  Title = "Título",
+  TitleIcon = "Ícone do Título",
 }
 export enum CharModalPlaceholder {
   Color = "Cor do personagem em hexadecimal, com o #",
@@ -74,4 +86,24 @@ export enum CharModalPlaceholder {
   Image = "Link da imagem do personagem",
   Name = "Nome do personagem",
   Prefix = "Prefixo do personagem",
+}
+
+export enum CharUpdateModalPlaceholder {
+  Color = "A nova cor do personagem em hexadecimal, com o #",
+  Description = "Uma nova descrição para o personagem",
+  Image = "Novo link da imagem do personagem",
+  Music = "Um novo link do youtube para a música",
+  Name = "Nome do personagem a ser atualizado",
+  Prefix = "Prefixo do personagem a ser atualizado",
+  Title = "Título do personagem a ser atualizado",
+  TitleIcon = "Link da imagem do título a ser atualizado",
+}
+export enum CharUpdateButtonLabel {
+  Color = "Cor do Embed",
+  Description = "Descrição",
+  Image = "Imagem",
+  Music = "Música",
+  Name = "Nome",
+  Prefix = "Prefixo",
+  Title = "Título",
 }

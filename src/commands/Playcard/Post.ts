@@ -74,6 +74,7 @@ export class Playcard {
         await Util.delay(index * 200);
         if (reply) {
           const sentMessage = await message.channel.send(reply);
+          const embedDescLength = sentMessage.embeds[0].description?.length ?? 0;
           if (sentMessage.inGuild()) {
             await characters.createPost(
               message.author.id,
@@ -81,7 +82,7 @@ export class Playcard {
               reply.characterId,
               sentMessage.guildId,
               sentMessage.id,
-              sentMessage.content.length
+              embedDescLength
             );
           }
           // Delete the original message when the replies are sent.

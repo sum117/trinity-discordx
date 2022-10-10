@@ -1,6 +1,7 @@
 import type { Char, CharTitle, Post } from "@prisma/client";
 import type { Snowflake } from "discord.js";
 
+import type { CharProfileQueryOptions, CharUpdateOptions } from "../../src/types/interfaces";
 import { Base } from "./Base";
 
 export class Character extends Base {
@@ -76,7 +77,8 @@ export class Character extends Base {
   }
   public async getOne(
     userId: Snowflake,
-    charId: number
+    charId: number,
+    ownerProtection = true
   ): Promise<
     | (Char & {
         posts: Post[];
@@ -84,13 +86,12 @@ export class Character extends Base {
       })
     | null
     | null
-  > {
-    const char = await this.prisma.char.findFirst({
-      include: {
-        posts: true,
-        title: true,
-      },
-      where: {
+    > {
+    let where: CharProfileQueryOptions = {
+      id: charId,
+    };
+    if (ownerProtection) {
+      where = {
         AND: [
           {
             authorId: userId,
@@ -99,7 +100,15 @@ export class Character extends Base {
             id: charId,
           },
         ],
+      };
+    }
+    const char = await this.prisma.char.findFirst({
+      include: {
+        posts: true,
+        title: true,
       },
+      where: where,
+
     });
     return char;
   }
@@ -166,6 +175,54 @@ export class Character extends Base {
           messageId: messageId,
         },
       });
+    }
+  }
+  public async updateChar(
+    userId: Snowflake,
+    charId: number,
+    options: CharUpdateOptions
+  ): Promise<(Char & {
+    posts: Post[];
+    title: CharTitle | null;
+  })| void> {
+    const char = await this.getOne(userId, charId);
+    if (char) {
+      if (options.title?.name && options.title?.iconURL) {
+        await this.prisma.charTitle.upsert({
+          create: {
+            charId: charId,
+            iconURL: options.title.iconURL,
+            name: options.title.name,
+          },
+          update: {
+            iconURL: options.title.iconURL,
+            name: options.title.name,
+          },
+          where: {
+            charId: charId,
+          },
+        });
+        delete options.title;
+      }
+      const updatedChar = await this.prisma.char.update({
+        data: {
+          color: options.color,
+          description: options.description,
+          image: options.image,
+          music: options.music,
+          name: options.name,
+          prefix: options.prefix,
+        },
+        include: {
+          posts: true,
+          title: true,
+        },
+        where: {
+          id: charId,
+        },
+
+      });
+      return updatedChar;
     }
   }
 }

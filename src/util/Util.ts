@@ -32,6 +32,11 @@ export class Util {
     return reg.test(url);
   };
 
+  public static youtubeValidator = (url: string): boolean => {
+    const reg = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+    return reg.test(url);
+  };
+
   public static getCharAutoComplete = (
     interaction: AutocompleteInteraction
   ): void => {
