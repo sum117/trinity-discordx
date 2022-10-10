@@ -28,13 +28,13 @@ export class Util {
   };
 
   public static imageValidator = (url: string): boolean => {
-    const reg = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+    const reg = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
     return reg.test(url);
   };
 
   public static youtubeValidator = (url: string): boolean => {
     const reg =
-      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+      /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
     return reg.test(url);
   };
 
