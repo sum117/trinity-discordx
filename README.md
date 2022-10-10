@@ -20,7 +20,7 @@ echo "BOT_TOKEN=YOUR_DISCORD_BOT_TOKEN" >> .env
 echo "DATABASE_URL=file/.dev.db" >> .env # Prisma dependency.
 ```
 
-# Contributing
+# ❤️ Contributing
 
  1. Fork the repository;
  2. Go to [pulls](https://github.com/sum117/trinity-discordx/pulls);
