@@ -32,7 +32,7 @@ export class Character extends Base {
         },
       });
     }
-    const char = await this.prisma.char.create({
+    return this.prisma.char.create({
       data: {
         authorId: userId,
         color: color,
@@ -42,7 +42,6 @@ export class Character extends Base {
         prefix: prefix,
       },
     });
-    return char;
   }
   public async deleteChar(userId: Snowflake, charId: number): Promise<void> {
     const char = await this.getOne(userId, charId);
@@ -78,7 +77,7 @@ export class Character extends Base {
       });
     }
   }
-  public async getOne(
+  public getOne(
     userId: Snowflake,
     charId: number,
     ownerProtection = true
@@ -87,7 +86,6 @@ export class Character extends Base {
         posts: Post[];
         title: CharTitle | null;
       })
-    | null
     | null
   > {
     let where: CharProfileQueryOptions = {
@@ -105,23 +103,22 @@ export class Character extends Base {
         ],
       };
     }
-    const char = await this.prisma.char.findFirst({
+    return this.prisma.char.findFirst({
       include: {
         posts: true,
         title: true,
       },
       where: where,
     });
-    return char;
   }
 
-  public async getAll(userId: Snowflake): Promise<
+  public getAll(userId: Snowflake): Promise<
     (Char & {
       posts: Post[];
       title: CharTitle | null;
     })[]
   > {
-    const chars = await this.prisma.char.findMany({
+    return this.prisma.char.findMany({
       include: {
         posts: true,
         title: true,
@@ -130,7 +127,6 @@ export class Character extends Base {
         authorId: userId,
       },
     });
-    return chars;
   }
   public async addLike(
     targetCharId: number,
@@ -158,7 +154,7 @@ export class Character extends Base {
       return;
     }
     parsedLikes.push(userId);
-    const updatedChar = await this.prisma.char.update({
+    return this.prisma.char.update({
       data: {
         likes: JSON.stringify(parsedLikes),
       },
@@ -170,7 +166,6 @@ export class Character extends Base {
         id: targetCharId,
       },
     });
-    return updatedChar;
   }
   public async createPost(
     userId: Snowflake,
@@ -200,13 +195,12 @@ export class Character extends Base {
       },
     });
   }
-  public async getPost(messageId: Snowflake): Promise<Post | null> {
-    const post = await this.prisma.post.findFirst({
+  public getPost(messageId: Snowflake): Promise<Post | null> {
+    return this.prisma.post.findFirst({
       where: {
         messageId: messageId,
       },
     });
-    return post;
   }
 
   public async deletePost(messageId: Snowflake): Promise<void> {
@@ -249,7 +243,7 @@ export class Character extends Base {
         });
         delete options.title;
       }
-      const updatedChar = await this.prisma.char.update({
+      return this.prisma.char.update({
         data: {
           color: options.color,
           description: options.description,
@@ -266,7 +260,6 @@ export class Character extends Base {
           id: charId,
         },
       });
-      return updatedChar;
     }
   }
 }

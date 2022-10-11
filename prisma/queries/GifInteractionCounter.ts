@@ -12,19 +12,18 @@ export class GifInteractionCounter extends Base {
     this.target = target;
     this.user = user;
   }
-  public async get(which: "target" | "user"): Promise<GifInteraction | null> {
-    const interaction = await this.prisma.gifInteraction.findUnique({
+  public get(which: "target" | "user"): Promise<GifInteraction | null> {
+    return this.prisma.gifInteraction.findUnique({
       where: {
         userId: this[which].id,
       },
     });
-    return interaction;
   }
-  public async increment(
+  public increment(
     whichUser: "target" | "user",
     value: keyof GifInteraction
   ): Promise<GifInteraction | null> {
-    const increment = await this.prisma.gifInteraction.upsert({
+    return this.prisma.gifInteraction.upsert({
       create: {
         user: {
           connectOrCreate: {
@@ -34,7 +33,6 @@ export class GifInteractionCounter extends Base {
             where: {
               id: this[whichUser].id,
             },
-
           },
         },
         [value]: 1,
@@ -48,6 +46,5 @@ export class GifInteractionCounter extends Base {
         userId: this[whichUser].id,
       },
     });
-    return increment;
   }
 }

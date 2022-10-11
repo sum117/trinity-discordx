@@ -3,10 +3,10 @@ import { AttachmentBuilder } from "discord.js";
 import type { ArgsOf } from "discordx";
 import { Discord, On } from "discordx";
 
-import { Character } from "../../../prisma/queries/Character";
+import { Character, UserLocale } from "../../../prisma/queries";
 import { CharEmbedBuilder } from "../../components/CharEmbed";
-import { ErrorMessage } from "../../types/enums";
 import type { MultiPostMessageOptions } from "../../types/interfaces";
+import { i18n } from "../../util/i18n";
 import { Util } from "../../util/Util";
 
 @Discord()
@@ -14,7 +14,7 @@ export class Playcard {
   @On({ event: "messageCreate" })
   public async post([
     message,
-  ]: ArgsOf<"messageCreate">): Promise<Message<boolean> | void> {
+  ]: ArgsOf<"messageCreate">): Promise<Message | void> {
     // Handle attachments
     const attachments =
       message.attachments.size > 0
@@ -69,7 +69,7 @@ export class Playcard {
         }
         return 0;
       });
-      sorted.forEach(async (reply, index) => {
+      sorted.map(async (reply, index) => {
         // Delay each message by 200ms to prevent weird Discord behavior
         await Util.delay(index * 200);
         if (reply) {
@@ -88,8 +88,10 @@ export class Playcard {
           }
           // Delete the original message when the replies are sent.
           if (index === replies.length - 1) {
-            await message.delete().catch(() => {
-              return console.log(ErrorMessage.UnknownMessage);
+
+            await message.delete().catch(async() => {
+              const locale = await new UserLocale().get(message.author.id);
+              return console.log(i18n.__({locale, phrase:"errorMessage.unknownMessage"}));
             });
           }
         }

@@ -2,32 +2,44 @@ import type { CommandInteraction, Message } from "discord.js";
 import { ApplicationCommandOptionType } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
-import { Character } from "../../../prisma/queries/Character";
-import { CommandInfo, Feedback } from "../../types/enums";
+import { Character, UserLocale } from "../../../prisma/queries";
+import { i18n } from "../../util/i18n";
 import { Util } from "../../util/Util";
 
 @Discord()
 @SlashGroup("char", "playcard")
 export class Playcard {
   @Slash({
-    description: CommandInfo.Delete,
+    description: i18n.__("commandInfo.delete"),
+    descriptionLocalizations: {
+      "en-US": i18n.__("commandInfo.delete"),
+      "pt-BR": i18n.__({locale: "pt_br", phrase: "commandInfo.delete"}),
+    },
     name: "delete",
   })
   public async delete(
     @SlashOption({
       autocomplete: Util.getCharAutoComplete,
-      description: CommandInfo.DeleteCharOption,
+      description: i18n.__("commandInfo.deleteCharOption"),
+      descriptionLocalizations: {
+        "en-US": i18n.__("commandInfo.deleteCharOption"),
+        "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.deleteCharOption" }),
+      },
       name: "char",
       required: true,
       type: ApplicationCommandOptionType.Integer,
     })
     charId: number,
     interaction: CommandInteraction
-  ): Promise<Message<boolean>> {
+  ): Promise<Message> {
+    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
     await interaction.deferReply({ ephemeral: true });
-    new Character().deleteChar(interaction.user.id, charId);
+    await new Character().deleteChar(interaction.user.id, charId);
     return interaction.editReply({
-      content: Feedback.CharacterDeleted,
+      content: i18n.__({
+        locale,
+        phrase: "feedback.characterDeleted"
+      }),
     });
   }
 }

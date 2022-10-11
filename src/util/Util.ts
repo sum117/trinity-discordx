@@ -1,6 +1,6 @@
 import type { AutocompleteInteraction } from "discord.js";
 
-import { Character } from "../../prisma/queries/Character";
+import { Character } from "../../prisma/queries";
 
 export class Util {
   public static delay = (ms: number): Promise<void> =>
@@ -28,7 +28,7 @@ export class Util {
   };
 
   public static imageValidator = (url: string): boolean => {
-    const reg = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+    const reg = /^(http(s?):)([/.\w\s-])*\.(?:jpg|gif|png)/;
     return reg.test(url);
   };
 
