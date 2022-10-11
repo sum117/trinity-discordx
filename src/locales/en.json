@@ -70,10 +70,11 @@
 		"title": "Title"
 	},
 	"helpEmbed": {
-		"color": "#36393e",
 		"footerText": "❤️ A bot made with a lot of love from a developer that loves fantasy.",
-		"roleplay": "To use your character, simply use its prefix with a `:` after it, and the text after that. You can use multiple characters in one message.\nExample: `johndoe: Hello, world!",
-		"title": "Trinity Commands"
+		"roleplay": "To use your character, simply use its prefix with a `:` after it, and the text after that. You can use multiple characters in one message.\nExample: `johndoe: Hello, world!`",
+		"title": "Trinity Commands",
+		"Title": "helpEmbed.Title",
+		"Color": "helpEmbed.Color"
 	},
 	"trinityModalTitle": {
 		"createChar": "Create Character",

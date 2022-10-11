@@ -70,7 +70,6 @@
 		"title": "Título"
 	},
 	"helpEmbed": {
-		"color": "#36393e",
 		"footerText": "❤️ Um bot feito com muito amor por um desenvolvedor apaixonado por fantasia.",
 		"roleplay": "Para usar seu personagem simplesmente use seu prefixo com um `:` após ele e o texto logo em seguida. É possível utilizar vários personagens em uma mensagem só.\n\nExemplo: `fulano: olá, mundo!`",
 		"title": "Comandos do Trinity"

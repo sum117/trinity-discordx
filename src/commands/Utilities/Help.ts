@@ -32,12 +32,12 @@ export class Utilities {
     const uniqueCommands = [...new Set(commands)].join("\n");
 
     const helpEmbed = new EmbedBuilder()
-      .setTitle(i18n.__({locale, phrase: "helpEmbed.Title"}))
-      .setColor(i18n.__({locale, phrase: "helpEmbed.Color"}) as ColorResolvable)
+      .setTitle(i18n.__({locale, phrase: "helpEmbed.title"}))
+      .setColor('Random')
       .setFooter({
-        text: i18n.__("helpEmbed.FooterText"),
+        text: i18n.__("helpEmbed.footerText"),
       })
-      .setDescription(i18n.__({locale, phrase: "helpEmbed.Roleplay"}) + "\n\n" + uniqueCommands)
+      .setDescription(i18n.__({locale, phrase: "helpEmbed.roleplay"}) + "\n\n" + uniqueCommands)
       .setThumbnail(interaction.client.user.displayAvatarURL({ size: 512 }));
 
     return interaction.reply({
