@@ -14,7 +14,7 @@ export class TrinityModal extends ModalBuilder {
 
   public char(locale = "en"): this {
     this.setCustomId("char_modal");
-    this.setTitle(i18n.__("trinityModalTitle.createChar"));
+    this.setTitle(i18n.__({locale, phrase: "trinityModalTitle.createChar"}));
     const inputs = [
       new TextInputBuilder()
         .setCustomId("char_modal_name")

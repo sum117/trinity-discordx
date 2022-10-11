@@ -24,9 +24,10 @@ export class CharEmbedBuilder extends EmbedBuilder {
     this.setTimestamp(Date.now());
   }
 
-  private _getTime(locale = "en") {
+  private _getTime(locale:string) {
     // Time in days
-    const formatter = new Intl.RelativeTimeFormat(locale);
+    const formattedLocale = locale.replace(/_/g, "-").toLowerCase();
+    const formatter = new Intl.RelativeTimeFormat(formattedLocale);
     return formatter.format(
       Math.floor(
         (Date.now() - this.char.createdAt.getTime()) / 1000 / 60 / 60 / 24
