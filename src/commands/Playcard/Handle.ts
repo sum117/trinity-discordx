@@ -6,46 +6,88 @@ import type {
 import { ApplicationCommandOptionType, EmbedBuilder } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
-import { Character } from "../../../prisma/queries/Character";
-import { CommandInfo, ErrorMessage, Feedback } from "../../types/enums";
+import { Character, UserLocale } from "../../../prisma/queries";
+import { i18n } from "../../util/i18n";
 
 @Discord()
-@SlashGroup({ description: CommandInfo.Playcard, name: "playcard" })
+@SlashGroup({
+  description: i18n.__("commandInfo.playcard"),
+  descriptionLocalizations: {
+    "en-US": i18n.__("commandInfo.playcard"),
+    "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.playcard" }),
+  },
+  name: "playcard",
+})
 @SlashGroup("playcard")
 export class Playcard {
-  @Slash({ description: CommandInfo.Edit, name: "edit" })
+  @Slash({
+    description: i18n.__("commandInfo.edit"),
+    descriptionLocalizations: {
+      "en-US": i18n.__("commandInfo.edit"),
+      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.edit" }),
+    },
+    name: "edit",
+  })
   async edit(
     @SlashOption({
-      description: CommandInfo.EditMessageOption,
+      description: i18n.__("commandInfo.editMessageOption"),
+      descriptionLocalizations: {
+        "en-US": i18n.__("commandInfo.editMessageOption"),
+        "pt-BR": i18n.__({
+          locale: "pt_br",
+          phrase: "commandInfo.editMessageOption",
+        }),
+      },
       name: "message_id",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     messageId: string,
     @SlashOption({
-      description: CommandInfo.EditContent,
+      description: i18n.__("commandInfo.editContent"),
+      descriptionLocalizations: {
+        "en-US": i18n.__("commandInfo.editContent"),
+        "pt-BR": i18n.__({
+          locale: "pt_br",
+          phrase: "commandInfo.editContent",
+        }),
+      },
       name: "content",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     content: string,
     interaction: CommandInteraction
-  ): Promise<InteractionResponse<boolean> | Message<boolean> | void> {
+  ): Promise<InteractionResponse | Message | void> {
     await interaction.deferReply({ ephemeral: true });
     return this._handleMessageRef("EDIT", messageId, interaction, content);
   }
 
-  @Slash({ description: CommandInfo.Delete, name: "delete" })
+  @Slash({
+    description: i18n.__("commandInfo.delete"),
+    descriptionLocalizations: {
+      "en-US": i18n.__("commandInfo.delete"),
+      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.delete" }),
+    },
+    name: "delete",
+  })
   async delete(
     @SlashOption({
-      description: CommandInfo.DeleteMessageOption,
+      description: i18n.__("commandInfo.deleteMessageOption"),
+      descriptionLocalizations: {
+        "en-US": i18n.__("commandInfo.deleteMessageOption"),
+        "pt-BR": i18n.__({
+          locale: "pt_br",
+          phrase: "commandInfo.deleteMessageOption",
+        }),
+      },
       name: "message_id",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     messageId: string,
     interaction: CommandInteraction
-  ): Promise<InteractionResponse<boolean> | Message<boolean> | void> {
+  ): Promise<InteractionResponse | Message | void> {
     await interaction.deferReply({ ephemeral: true });
     return this._handleMessageRef("DELETE", messageId, interaction);
   }
@@ -55,45 +97,80 @@ export class Playcard {
     messageId: string,
     interaction: CommandInteraction,
     content?: string
-  ): Promise<InteractionResponse<boolean> | Message<boolean> | void> {
+  ): Promise<InteractionResponse | Message | void> {
+    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
     const characters = new Character();
     const messageRef = await characters.getPost(messageId);
     // Handle post credentials from database
     if (messageRef?.authorId !== interaction.user.id) {
-      return interaction.editReply(ErrorMessage.NotPostOwner);
+      return interaction.editReply(
+        i18n.__({
+          locale,
+          phrase: "errorMessage.notPostOwner",
+        })
+      );
     }
     const databaseChannel = interaction.client.guilds.cache
       .get(messageRef.guildId)
       ?.channels.cache.get(messageRef.channelId);
     if (!databaseChannel?.isTextBased()) {
-      return interaction.editReply(ErrorMessage.UnknownChannel);
+      return interaction.editReply(
+        i18n.__({
+          locale,
+          phrase: "errorMessage.unknownChannel",
+        })
+      );
     }
 
     const message = await databaseChannel.messages
       .fetch(messageRef.messageId)
-      .catch(() => console.log(ErrorMessage.FetchError));
+      .catch(() =>
+        console.log(
+          i18n.__({
+            locale,
+            phrase: "errorMessage.fetchError",
+          })
+        )
+      );
     if (!message) {
-      return interaction.editReply(ErrorMessage.UnknownMessage);
+      return interaction.editReply(
+        i18n.__({
+          locale,
+          phrase: "errorMessage.unknownMessage",
+        })
+      );
     }
 
     if (method === "EDIT") {
       // Build embed from api component
       const embedToEdit = EmbedBuilder.from(message.embeds[0]);
       if (!content) {
-        return interaction.editReply(ErrorMessage.NoEditContent);
+        return interaction.editReply(
+          i18n.__({ locale, phrase: "errorMessage.noEditContent" })
+        );
       }
       // Append content to embed
       embedToEdit.setDescription(content);
-      await interaction.editReply(Feedback.MessageEditted);
+      await interaction.editReply(
+        i18n.__({ locale, phrase: "feedback.messageEditted" })
+      );
       return message.edit({ embeds: [embedToEdit] });
     } else if (method === "DELETE") {
       await characters
         .deletePost(messageId)
-        .catch(() => console.log(ErrorMessage.DatabaseError));
+        .catch(() =>
+          console.log(i18n.__({ locale, phrase: "errorMessage.databaseError" }))
+        );
       await message
         .delete()
-        .catch(() => console.log(ErrorMessage.UnknownMessage));
-      await interaction.editReply(Feedback.PostDeleted);
+        .catch(() =>
+          console.log(
+            i18n.__({ locale, phrase: "errorMessage.unknownMessage" })
+          )
+        );
+      await interaction.editReply(
+        i18n.__({ locale, phrase: "feedback.postDeleted" })
+      );
     }
   }
 }

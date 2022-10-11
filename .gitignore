@@ -9,3 +9,4 @@ dev.db
 # folders
 build
 node_modules
+.idea

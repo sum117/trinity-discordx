@@ -15,6 +15,7 @@ model User {
   posts          Post[]
   chars          Char[]
   gifInteraction GifInteraction?
+  locale         String?
 }
 
 model Post {

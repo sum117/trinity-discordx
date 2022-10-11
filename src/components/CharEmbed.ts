@@ -2,7 +2,7 @@ import type { Char, CharTitle, Post } from "@prisma/client";
 import type { ColorResolvable, User } from "discord.js";
 import { EmbedBuilder } from "discord.js";
 
-import { CharEmbedField } from "../types/enums";
+import { i18n } from "../util/i18n";
 
 export class CharEmbedBuilder extends EmbedBuilder {
   public constructor(
@@ -24,16 +24,15 @@ export class CharEmbedBuilder extends EmbedBuilder {
     this.setTimestamp(Date.now());
   }
 
-  private _getTime() {
+  private _getTime(locale = "en") {
     // Time in days
-    const formatter = new Intl.RelativeTimeFormat("pt-br");
-    const time = formatter.format(
+    const formatter = new Intl.RelativeTimeFormat(locale);
+    return formatter.format(
       Math.floor(
         (Date.now() - this.char.createdAt.getTime()) / 1000 / 60 / 60 / 24
       ),
       "days"
     );
-    return time;
   }
   public post(post: string): this {
     this.setDescription(post);
@@ -45,7 +44,7 @@ export class CharEmbedBuilder extends EmbedBuilder {
     }
     return this;
   }
-  public profile(): this {
+  public profile(locale = "en"): this {
     if (this.char?.title?.name && this.char?.title?.iconURL) {
       this.setAuthor({
         iconURL: this.char.title.iconURL,
@@ -56,28 +55,40 @@ export class CharEmbedBuilder extends EmbedBuilder {
     this.setTitle(null);
     this.setURL(null);
     this.setImage(this.char.image);
+
     this.addFields([
       { inline: true, name: "ID", value: "#" + this.char.id },
-      { inline: true, name: CharEmbedField.Name, value: this.char.name },
       {
         inline: true,
-        name: CharEmbedField.Posts,
+        name: i18n.__({ locale, phrase: "charEmbedField.name"}),
+        value: this.char.name,
+      },
+      {
+        inline: true,
+        name: i18n.__({locale, phrase: "charEmbedField.posts"}),
         value: this.char.posts.length.toString(),
       },
       {
         inline: true,
-        name: CharEmbedField.LetterCount,
+        name: i18n.__({locale, phrase: "charEmbedField.letterCount"}),
         value: this.char.letters.toString(),
       },
-      { inline: true, name: CharEmbedField.CreatedAt, value: this._getTime() },
       {
         inline: true,
-        name: CharEmbedField.Likes,
+        name: i18n.__({locale, phrase: "charEmbedField.createdAt"}),
+        value: this._getTime(locale),
+      },
+      {
+        inline: true,
+        name: i18n.__({locale, phrase: "charEmbedField.likes"}),
         value: JSON.parse(this.char.likes)?.length?.toString() ?? "0",
       },
     ]);
     if (this.char.music) {
-      this.addFields({ name: CharEmbedField.Music, value: this.char.music });
+      this.addFields({
+        name: i18n.__({locale, phrase: "charEmbedField.music"}),
+        value: this.char.music,
+      });
     }
     if (this.char.description) {
       this.setDescription(this.char.description);

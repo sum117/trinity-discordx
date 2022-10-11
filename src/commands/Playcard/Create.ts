@@ -5,32 +5,46 @@ import type {
 } from "discord.js";
 import { Discord, ModalComponent, Slash, SlashGroup } from "discordx";
 
-import { Character } from "../../../prisma/queries/Character";
+import { Character, UserLocale } from "../../../prisma/queries";
 import { TrinityModal } from "../../components/TrinityModal";
-import { CommandInfo, ErrorMessage, Feedback } from "../../types/enums";
+import { i18n } from "../../util/i18n";
 import { Util } from "../../util/Util";
 
 @Discord()
 @SlashGroup({
-  description: CommandInfo.ManagePlaycard,
+  description: "commandInfo.managePlaycard",
+  descriptionLocalizations: {
+    "en-US": i18n.__("commandInfo.managePlaycard"),
+    "pt-BR": i18n.__({
+      locale: "pt_br",
+      phrase: "commandInfo.managePlaycard",
+    }),
+  },
   name: "char",
   root: "playcard",
 })
 @SlashGroup("char", "playcard")
 export class Playcard {
   @Slash({
-    description: CommandInfo.Create,
+    description: i18n.__("commandInfo.create"),
+    descriptionLocalizations: {
+      "en-US": i18n.__("commandInfo.create"),
+      "pt-BR": i18n.__({
+        locale: "pt_br",
+        phrase: "commandInfo.create",
+      })
+    },
     name: "create",
   })
-  public create(interaction: CommandInteraction): Promise<void> {
-    const modal = new TrinityModal().char();
+  public async create(interaction: CommandInteraction): Promise<void> {
+    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const modal = new TrinityModal().char(locale);
     return interaction.showModal(modal);
   }
 
   @ModalComponent({ id: "char_modal" })
-  public async receive(
-    interaction: ModalSubmitInteraction
-  ): Promise<Message<boolean>> {
+  public async receive(interaction: ModalSubmitInteraction): Promise<Message> {
+    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
     await interaction.deferReply({ ephemeral: true });
     const [name, prefix, image, description, color] = [
       "char_modal_name",
@@ -50,15 +64,24 @@ export class Playcard {
 
     if (colorExists) {
       return interaction.editReply({
-        content: ErrorMessage.Color,
+        content: i18n.__({
+          locale,
+          phrase: "errorMessage.color",
+        }),
       });
     } else if (imageExists) {
       return interaction.editReply({
-        content: ErrorMessage.Image,
+        content: i18n.__({
+          locale,
+          phrase: "errorMessage.image",
+        }),
       });
     } else if (prefixExists) {
       return interaction.editReply({
-        content: ErrorMessage.Prefix,
+        content: i18n.__({
+          locale,
+          phrase: "errorMessage.prefix",
+        }),
       });
     }
 
@@ -72,9 +95,15 @@ export class Playcard {
     );
     if (createdCharacter) {
       return interaction.editReply({
-        content: Feedback.CharacterCreated,
+        content: i18n.__({
+          locale,
+          phrase: "feedback.characterCreated",
+        }),
       });
     }
-    return interaction.editReply(ErrorMessage.DatabaseError);
+    return interaction.editReply(i18n.__({
+      locale,
+      phrase: "errorMessage.databaseError",
+    }));
   }
 }

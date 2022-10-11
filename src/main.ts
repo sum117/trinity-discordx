@@ -49,15 +49,15 @@ bot.on("messageCreate", (message: Message) => {
 });
 
 // Error Handling
-bot.on('error', (error: Error) => {
-  console.error(error)
-})
-process.on('rejectionHandled', (error: Error) => {
-  console.error(error)
-})
-process.on('unhandledRejection', (error: Error) => {
-  console.log(error)
-})
+bot.on("error", (error: Error) => {
+  console.error(error);
+});
+process.on("rejectionHandled", (error: Error) => {
+  console.error(error);
+});
+process.on("unhandledRejection", (error: Error) => {
+  console.log(error);
+});
 
 async function run() {
   // The following syntax should be used in the commonjs environment
