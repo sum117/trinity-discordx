@@ -88,10 +88,11 @@ export class Playcard {
           }
           // Delete the original message when the replies are sent.
           if (index === replies.length - 1) {
-
-            await message.delete().catch(async() => {
+            await message.delete().catch(async () => {
               const locale = await new UserLocale().get(message.author.id);
-              return console.log(i18n.__({locale, phrase:"errorMessage.unknownMessage"}));
+              return console.log(
+                i18n.__({ locale, phrase: "errorMessage.unknownMessage" })
+              );
             });
           }
         }

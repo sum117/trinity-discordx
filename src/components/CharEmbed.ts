@@ -60,33 +60,33 @@ export class CharEmbedBuilder extends EmbedBuilder {
       { inline: true, name: "ID", value: "#" + this.char.id },
       {
         inline: true,
-        name: i18n.__({ locale, phrase: "charEmbedField.name"}),
+        name: i18n.__({ locale, phrase: "charEmbedField.name" }),
         value: this.char.name,
       },
       {
         inline: true,
-        name: i18n.__({locale, phrase: "charEmbedField.posts"}),
+        name: i18n.__({ locale, phrase: "charEmbedField.posts" }),
         value: this.char.posts.length.toString(),
       },
       {
         inline: true,
-        name: i18n.__({locale, phrase: "charEmbedField.letterCount"}),
+        name: i18n.__({ locale, phrase: "charEmbedField.letterCount" }),
         value: this.char.letters.toString(),
       },
       {
         inline: true,
-        name: i18n.__({locale, phrase: "charEmbedField.createdAt"}),
+        name: i18n.__({ locale, phrase: "charEmbedField.createdAt" }),
         value: this._getTime(locale),
       },
       {
         inline: true,
-        name: i18n.__({locale, phrase: "charEmbedField.likes"}),
+        name: i18n.__({ locale, phrase: "charEmbedField.likes" }),
         value: JSON.parse(this.char.likes)?.length?.toString() ?? "0",
       },
     ]);
     if (this.char.music) {
       this.addFields({
-        name: i18n.__({locale, phrase: "charEmbedField.music"}),
+        name: i18n.__({ locale, phrase: "charEmbedField.music" }),
         value: this.char.music,
       });
     }

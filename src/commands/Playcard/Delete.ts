@@ -13,7 +13,7 @@ export class Playcard {
     description: i18n.__("commandInfo.delete"),
     descriptionLocalizations: {
       "en-US": i18n.__("commandInfo.delete"),
-      "pt-BR": i18n.__({locale: "pt_br", phrase: "commandInfo.delete"}),
+      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.delete" }),
     },
     name: "delete",
   })
@@ -23,7 +23,10 @@ export class Playcard {
       description: i18n.__("commandInfo.deleteCharOption"),
       descriptionLocalizations: {
         "en-US": i18n.__("commandInfo.deleteCharOption"),
-        "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.deleteCharOption" }),
+        "pt-BR": i18n.__({
+          locale: "pt_br",
+          phrase: "commandInfo.deleteCharOption",
+        }),
       },
       name: "char",
       required: true,
@@ -32,13 +35,16 @@ export class Playcard {
     charId: number,
     interaction: CommandInteraction
   ): Promise<Message> {
-    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
     await interaction.deferReply({ ephemeral: true });
     await new Character().deleteChar(interaction.user.id, charId);
     return interaction.editReply({
       content: i18n.__({
         locale,
-        phrase: "feedback.characterDeleted"
+        phrase: "feedback.characterDeleted",
       }),
     });
   }

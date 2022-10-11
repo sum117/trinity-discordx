@@ -35,7 +35,7 @@ export class Utilities {
   ): Promise<InteractionResponse> {
     await new UserLocale().set(interaction.user.id, locale);
     return interaction.reply(
-      i18n.__({ locale, phrase: "commandInfo.localeSuccess" })
+      i18n.__({ locale, phrase: "feedback.localeSuccess" })
     );
   }
 }

@@ -98,7 +98,10 @@ export class Playcard {
     interaction: CommandInteraction,
     content?: string
   ): Promise<InteractionResponse | Message | void> {
-    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
     const characters = new Character();
     const messageRef = await characters.getPost(messageId);
     // Handle post credentials from database

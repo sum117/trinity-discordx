@@ -18,37 +18,47 @@ export class TrinityModal extends ModalBuilder {
     const inputs = [
       new TextInputBuilder()
         .setCustomId("char_modal_name")
-        .setLabel(i18n.__({locale, phrase: "charModalLabel.name"}))
-        .setPlaceholder(i18n.__({locale, phrase: "charModalPlaceholder.name"}))
+        .setLabel(i18n.__({ locale, phrase: "charModalLabel.name" }))
+        .setPlaceholder(
+          i18n.__({ locale, phrase: "charModalPlaceholder.name" })
+        )
         .setMaxLength(256)
         .setRequired(true)
         .setStyle(TextInputStyle.Short),
       new TextInputBuilder()
         .setCustomId("char_modal_prefix")
-        .setLabel(i18n.__({locale, phrase: "charModalLabel.prefix"}))
-        .setPlaceholder(i18n.__({locale, phrase: "charModalPlaceholder.prefix"}))
+        .setLabel(i18n.__({ locale, phrase: "charModalLabel.prefix" }))
+        .setPlaceholder(
+          i18n.__({ locale, phrase: "charModalPlaceholder.prefix" })
+        )
         .setMaxLength(32)
         .setRequired(true)
         .setStyle(TextInputStyle.Short),
       new TextInputBuilder()
         .setCustomId("char_modal_image")
-        .setLabel(i18n.__({locale, phrase: "charModalLabel.image"}))
-        .setPlaceholder(i18n.__({locale, phrase: "charModalPlaceholder.image"}))
+        .setLabel(i18n.__({ locale, phrase: "charModalLabel.image" }))
+        .setPlaceholder(
+          i18n.__({ locale, phrase: "charModalPlaceholder.image" })
+        )
         .setMaxLength(256)
         .setRequired(true)
         .setStyle(TextInputStyle.Short),
       new TextInputBuilder()
         .setCustomId("char_modal_description")
-        .setLabel(i18n.__({locale, phrase:"charModalLabel.description"}))
-        .setPlaceholder(i18n.__({locale, phrase:"charModalPlaceholder.description"}))
+        .setLabel(i18n.__({ locale, phrase: "charModalLabel.description" }))
+        .setPlaceholder(
+          i18n.__({ locale, phrase: "charModalPlaceholder.description" })
+        )
         .setMaxLength(4000)
         .setRequired(false)
         .setStyle(TextInputStyle.Paragraph),
 
       new TextInputBuilder()
         .setCustomId("char_modal_color")
-        .setLabel(i18n.__({locale, phrase: "charModalLabel.color"}))
-        .setPlaceholder(i18n.__({locale, phrase: "charModalPlaceholder.color"}))
+        .setLabel(i18n.__({ locale, phrase: "charModalLabel.color" }))
+        .setPlaceholder(
+          i18n.__({ locale, phrase: "charModalPlaceholder.color" })
+        )
         .setMaxLength(7)
         .setRequired(false)
         .setStyle(TextInputStyle.Short),

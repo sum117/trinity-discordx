@@ -1,127 +1,122 @@
 {
-	"errorMessage": {
-		"alreadyLiked": "Você já deu like nesse personagem.",
-		"cannotLikeMessage": "Você não pode dar like em uma mensagem.",
-		"characterInvalidImage": "A imagem do(a) seu/sua personagem não é válida.",
-		"characterInvalidName": "O nome do(a) seu/sua personagem não é válido.",
-		"characterNotCreated": "Seu/sua personagem não pôde ser criado(a).",
-		"characterNotFound": "Seu/sua personagem não pôde ser encontrado(a).",
-		"color": "Por favor insira uma cor válida. Ela deve conter # no começo e 6 caracteres hexadecimais.",
-		"databaseError": "Ocorreu um erro no banco de dados. Entre no servidor de suporte e reporte o erro se você acreditar que ele é um bug.",
-		"fetchError": "Ocorreu um erro ao buscar a mensagem. ",
-		"image": "Por favor insira um link de imagem válido. Ela deve conter http(s):// no começo e terminar com .jpg, .png ou .gif.",
-		"music": "Por favor insira um link do youtube válido.",
-		"noEditContent": "Você não forneceu um conteúdo para editar a mensagem.",
-		"notPostOwner": "Você não é o(a) dono(a) da mensagem ou ela não é elegível para ser deletada. Não é possível deletá-la ou editá-la.",
-		"prefix": "O prefixo do(a) seu/sua personagem já existe em algum outro personagem seu.",
-		"unknownChannel": "Incapaz de encontrar o canal da mensagem. Verifique se o canal ainda existe.",
-		"unknownMessage": "Incapaz de deletar ou editar a mensagem inexistente."
-	},
-	"feedback": {
-		"bite": "**{user} mordeu {target}**\n{target} foi mordido(a) {counter} vezes.",
-		"characterCreated": "Seu/Sua personagem foi criado com sucesso.",
-		"characterDeleted": "Seu/Sua personagem foi excluído com sucesso.",
-		"characterLiked": "❤️ Você deu uma curtida neste personagem!",
-		"characterUpdateMenu": "Atualizando o(a) personagem de {character} de {user}.",
-		"characterUpdated": "Seu/Sua personagem foi atualizado com sucesso.",
-		"displayProfile": "Exibindo perfil do(a) personagem {character} de {user}.",
-		"hug": "**{user} abraçou {target}**\n{target} foi abraçado(a) {counter} vezes.",
-		"kiss": "**{user} beijou {target}**\n{target} foi beijado(a) {counter} vezes.",
-		"messageEditted": "Mensagem editada com sucesso.",
-		"postDeleted": "Seu post foi excluído com sucesso.",
-		"postUpdated": "Seu post foi atualizado com sucesso.",
-		"punch": "**{user} deu um soco em {target}**\n{target} foi socado(a) {counter} vezes.",
-		"slap": "**{user} deu um tapa em {target}**\n{target} levou um tapa {counter} vezes."
-	},
-	"commandInfo": {
-		"avatar": "Mostra a imagem de perfil de um(a) usuário(a).",
-		"avatarOption": "Usuário(a) que você deseja ver a imagem de perfil.",
-		"create": "Cria um personagem.",
-		"delete": "Delete um post do playcard.",
-		"deleteCharOption": "Personagem que você deseja deletar.",
-		"deleteMessageOption": "Id da mensagem que você deseja deletar.",
-		"edit": "Edita um post do playcard.",
-		"editContent": "Novo conteúdo do Post.",
-		"editMessageOption": "Id da mensagem que você deseja editar.",
-		"help": "Obtenha a lista de comandos do Trinity.",
-		"locale": "Muda o idioma do bot.",
-		"localeOption": "Idioma que você deseja mudar.",
-		"interact": "Comandos de interação.",
-		"interactBite": "Morda um(a) usuário(a).",
-		"interactHug": "Abraça um(a) usuário(a).",
-		"interactKiss": "Beija um(a) usuário(a).",
-		"interactPunch": "Da um tapa em um(a) usuário(a).",
-		"interactSlap": "Dá um tapa em um(a) usuário(a).",
-		"interactUserOption": "Usuário(a) que você deseja interagir.",
-		"managePlaycard": "Comandos de gerenciamento dos personagens.",
-		"playcard": "Comandos relacionados ao sistema de personagens.",
-		"profile": "Mostra o perfil de um personagem.",
-		"profileCharOption": "Personagem que você deseja ver o perfil.",
-		"update": "Atualiza um personagem.",
-		"updateCharOption": "Personagem que você deseja atualizar."
-	},
-	"charEmbedField": {
-		"createdAt": "Criado",
-		"letterCount": "Total de Caracteres",
-		"likes": "Curtidas",
-		"music": "Link da música",
-		"name": "Nome",
-		"posts": "Quantia de Posts",
-		"title": "Título"
-	},
-	"helpEmbed": {
-		"footerText": "❤️ Um bot feito com muito amor por um desenvolvedor apaixonado por fantasia.",
-		"roleplay": "Para usar seu personagem simplesmente use seu prefixo com um `:` após ele e o texto logo em seguida. É possível utilizar vários personagens em uma mensagem só.\n\nExemplo: `fulano: olá, mundo!`",
-		"title": "Comandos do Trinity"
-	},
-	"trinityModalTitle": {
-		"createChar": "Criar Personagem",
-		"updateChar": "Atualizar Personagem"
-	},
-	"charModalLabel": {
-		"color": "Cor",
-		"description": "Descrição",
-		"image": "Imagem",
-		"music": "Música",
-		"name": "Nome",
-		"prefix": "Prefixo",
-		"title": "Título",
-		"titleIcon": "Ícone do Título"
-	},
-	"charModalPlaceholder": {
-		"color": "Cor do personagem em hexadecimal, com o #",
-		"description": "Descrição do personagem",
-		"image": "Link da imagem do personagem",
-		"name": "Nome do personagem",
-		"prefix": "Prefixo do personagem"
-	},
-	"charUpdateModalPlaceholder": {
-		"color": "A nova cor do personagem em hexadecimal, com o #",
-		"description": "Uma nova descrição para o personagem",
-		"image": "Novo link da imagem do personagem",
-		"music": "Um novo link do youtube para a música",
-		"name": "Nome do personagem a ser atualizado",
-		"prefix": "Prefixo do personagem a ser atualizado",
-		"title": "Título do personagem a ser atualizado",
-		"titleIcon": "Link da imagem do título a ser atualizado"
-	},
-	"charUpdateButtonLabel": {
-		"color": "Cor do Embed",
-		"description": "Descrição",
-		"image": "Imagem",
-		"music": "Música",
-		"name": "Nome",
-		"prefix": "Prefixo",
-		"title": "Título"
-	},
-	"charLikeButton": {
-		"emoji": "👍",
-		"like": "Curtir"
-	},
-	"successMessage": {
-		"localeChanged": "successMessage.localeChanged"
-	},
-	"interact": {
-		"kiss": "interact.kiss"
-	}
+  "errorMessage": {
+    "alreadyLiked": "Você já deu like nesse personagem.",
+    "cannotLikeMessage": "Você não pode dar like em uma mensagem.",
+    "characterInvalidImage": "A imagem do(a) seu/sua personagem não é válida.",
+    "characterInvalidName": "O nome do(a) seu/sua personagem não é válido.",
+    "characterNotCreated": "Seu/sua personagem não pôde ser criado(a).",
+    "characterNotFound": "Seu/sua personagem não pôde ser encontrado(a).",
+    "color": "Por favor insira uma cor válida. Ela deve conter # no começo e 6 caracteres hexadecimais.",
+    "databaseError": "Ocorreu um erro no banco de dados. Entre no servidor de suporte e reporte o erro se você acreditar que ele é um bug.",
+    "fetchError": "Ocorreu um erro ao buscar a mensagem. ",
+    "image": "Por favor insira um link de imagem válido. Ela deve conter http(s):// no começo e terminar com .jpg, .png ou .gif.",
+    "music": "Por favor insira um link do youtube válido.",
+    "noEditContent": "Você não forneceu um conteúdo para editar a mensagem.",
+    "notPostOwner": "Você não é o(a) dono(a) da mensagem ou ela não é elegível para ser deletada. Não é possível deletá-la ou editá-la.",
+    "prefix": "O prefixo do(a) seu/sua personagem já existe em algum outro personagem seu.",
+    "unknownChannel": "Incapaz de encontrar o canal da mensagem. Verifique se o canal ainda existe.",
+    "unknownMessage": "Incapaz de deletar ou editar a mensagem inexistente."
+  },
+  "feedback": {
+    "bite": "**{user} mordeu {target}**\n{target} foi mordido(a) {counter} vezes.",
+    "characterCreated": "Seu/Sua personagem foi criado com sucesso.",
+    "characterDeleted": "Seu/Sua personagem foi excluído com sucesso.",
+    "characterLiked": "❤️ Você deu uma curtida neste personagem!",
+    "characterUpdateMenu": "Atualizando o(a) personagem de {character} de {user}.",
+    "characterUpdated": "Seu/Sua personagem foi atualizado com sucesso.",
+    "displayProfile": "Exibindo perfil do(a) personagem {character} de {user}.",
+    "hug": "**{user} abraçou {target}**\n{target} foi abraçado(a) {counter} vezes.",
+    "kiss": "**{user} beijou {target}**\n{target} foi beijado(a) {counter} vezes.",
+    "messageEditted": "Mensagem editada com sucesso.",
+    "postDeleted": "Seu post foi excluído com sucesso.",
+    "postUpdated": "Seu post foi atualizado com sucesso.",
+    "punch": "**{user} deu um soco em {target}**\n{target} foi socado(a) {counter} vezes.",
+    "slap": "**{user} deu um tapa em {target}**\n{target} levou um tapa {counter} vezes.",
+    "localeSuccess": "O seu idioma preferido foi atualizado."
+  },
+  "commandInfo": {
+    "avatar": "Mostra a imagem de perfil de um(a) usuário(a).",
+    "avatarOption": "Usuário(a) que você deseja ver a imagem de perfil.",
+    "create": "Cria um personagem.",
+    "delete": "Delete um post do playcard.",
+    "deleteCharOption": "Personagem que você deseja deletar.",
+    "deleteMessageOption": "Id da mensagem que você deseja deletar.",
+    "edit": "Edita um post do playcard.",
+    "editContent": "Novo conteúdo do Post.",
+    "editMessageOption": "Id da mensagem que você deseja editar.",
+    "help": "Obtenha a lista de comandos do Trinity.",
+    "locale": "Muda o idioma do bot.",
+    "localeOption": "Idioma que você deseja mudar.",
+    "interact": "Comandos de interação.",
+    "interactBite": "Morda um(a) usuário(a).",
+    "interactHug": "Abraça um(a) usuário(a).",
+    "interactKiss": "Beija um(a) usuário(a).",
+    "interactPunch": "Da um tapa em um(a) usuário(a).",
+    "interactSlap": "Dá um tapa em um(a) usuário(a).",
+    "interactUserOption": "Usuário(a) que você deseja interagir.",
+    "managePlaycard": "Comandos de gerenciamento dos personagens.",
+    "playcard": "Comandos relacionados ao sistema de personagens.",
+    "profile": "Mostra o perfil de um personagem.",
+    "profileCharOption": "Personagem que você deseja ver o perfil.",
+    "update": "Atualiza um personagem.",
+    "updateCharOption": "Personagem que você deseja atualizar."
+  },
+  "charEmbedField": {
+    "createdAt": "Criado",
+    "letterCount": "Total de Caracteres",
+    "likes": "Curtidas",
+    "music": "Link da música",
+    "name": "Nome",
+    "posts": "Quantia de Posts",
+    "title": "Título"
+  },
+  "helpEmbed": {
+    "footerText": "❤️ Um bot feito com muito amor por um desenvolvedor apaixonado por fantasia.",
+    "roleplay": "Para usar seu personagem simplesmente use seu prefixo com um `:` após ele e o texto logo em seguida. É possível utilizar vários personagens em uma mensagem só.\n\nExemplo: `fulano: olá, mundo!`",
+    "title": "Comandos do Trinity"
+  },
+  "trinityModalTitle": {
+    "createChar": "Criar Personagem",
+    "updateChar": "Atualizar Personagem"
+  },
+  "charModalLabel": {
+    "color": "Cor",
+    "description": "Descrição",
+    "image": "Imagem",
+    "music": "Música",
+    "name": "Nome",
+    "prefix": "Prefixo",
+    "title": "Título",
+    "titleIcon": "Ícone do Título"
+  },
+  "charModalPlaceholder": {
+    "color": "Cor do personagem em hexadecimal, com o #",
+    "description": "Descrição do personagem",
+    "image": "Link da imagem do personagem",
+    "name": "Nome do personagem",
+    "prefix": "Prefixo do personagem"
+  },
+  "charUpdateModalPlaceholder": {
+    "color": "A nova cor do personagem em hexadecimal, com o #",
+    "description": "Uma nova descrição para o personagem",
+    "image": "Novo link da imagem do personagem",
+    "music": "Um novo link do youtube para a música",
+    "name": "Nome do personagem a ser atualizado",
+    "prefix": "Prefixo do personagem a ser atualizado",
+    "title": "Título do personagem a ser atualizado",
+    "titleIcon": "Link da imagem do título a ser atualizado"
+  },
+  "charUpdateButtonLabel": {
+    "color": "Cor do Embed",
+    "description": "Descrição",
+    "image": "Imagem",
+    "music": "Música",
+    "name": "Nome",
+    "prefix": "Prefixo",
+    "title": "Título"
+  },
+  "charLikeButton": {
+    "emoji": "👍",
+    "like": "Curtir"
+  }
 }

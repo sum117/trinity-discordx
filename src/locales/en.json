@@ -1,129 +1,124 @@
 {
-	"errorMessage": {
-		"alreadyLiked": "You already liked this character.",
-		"cannotLikeMessage": "You cannot like this message.",
-		"characterInvalidImage": "The image of your character is invalid.",
-		"characterInvalidName": "The name of your character is invalid.",
-		"characterNotCreated": "Your character could not be created.",
-		"characterNotFound": "Your character was not found.",
-		"color": "Please insert a color. it should contain a # in the start and 6 hexadecimal chars.",
-		"databaseError": "Error saving your data. This could be caused by a slow request. If you think this is a bug, please contact our support server: https://discord.gg/qc6eKhvN9Z",
-		"fetchError": "Error fetching data. ",
-		"image": "Please insert a valid image link. It must start with https and end with a media extension: .gif, .png, .jpg & etc.",
-		"music": "Please insert a valid youtube link.",
-		"noEditContent": "You didn't offer any content to edit the message with.",
-		"notPostOwner": "You are not the message owner or it is not eligible to be edited.",
-		"prefix": "This prefix already exists in one of your other characters.",
-		"unknownChannel": "Cannot find the channel of the message. Make sure it exists.",
-		"unknownMessage": "Cannot delete or edit an unknown message."
-	},
-	"feedback": {
-		"bite": "**{user} bit {target}**\n{target} was bitten {counter} times.",
-		"characterCreated": "Your character was created successfully.",
-		"characterDeleted": "Your character was deleted successfully.",
-		"characterLiked": "❤️ You liked this character",
-		"characterUpdateMenu": "Updating {character} from {user}.",
-		"characterUpdated": "Your character was updated successfully.",
-		"displayProfile": "Showing {character}'s profile from {user}.",
-		"hug": "**{user} hugged {target}**\n{target} was hugged {counter} times.",
-		"kiss": "**{user} kissed {target}**\n{target} was kissed {counter} times.",
-		"messageEditted": "Message edited successfully.",
-		"postDeleted": "Your post was deleted successfully.",
-		"postUpdated": "Your post was updated successfully.",
-		"punch": "**{user} punched {target}**\n{target} was punched {counter} times.",
-		"slap": "**{user} slapped {target}**\n{target} was slapped {counter} times."
-	},
-	"commandInfo": {
-		"avatar": "Shows the avatar image of an user",
-		"avatarOption": "User you want to see the avatar from",
-		"create": "Creates a character",
-		"delete": "Deletes a playcard post",
-		"deleteCharOption": "Character you want to delete",
-		"deleteMessageOption": "Id of the message you want to delete",
-		"edit": "Edit a playcard post",
-		"editContent": "new playcard post content",
-		"editMessageOption": "Id of the message you want to edit",
-		"help": "Obtain trinity's command list",
-		"locale": "Change the bot's language",
-		"localeOption": "Language you want to change to",
-		"interact": "Interaction commands",
-		"interactBite": "Bite someone",
-		"interactHug": "Hug someone",
-		"interactKiss": "Kiss someone",
-		"interactPunch": "Punch someone",
-		"interactSlap": "Slap someone",
-		"interactUserOption": "User you want to interact with",
-		"managePlaycard": "Playcard management commands",
-		"playcard": "Commands related to character creation/usage.",
-		"profile": "Shows character profile.",
-		"profileCharOption": "Character you want to see the profile from.",
-		"update": "Updates a character.",
-		"updateCharOption": "Character you want to update."
-	},
-	"charEmbedField": {
-		"createdAt": "Created",
-		"letterCount": "Total of Letters",
-		"likes": "Likes",
-		"music": "Music Link",
-		"name": "Name",
-		"posts": "Total of Posts",
-		"title": "Title"
-	},
-	"helpEmbed": {
-		"footerText": "❤️ A bot made with a lot of love from a developer that loves fantasy.",
-		"roleplay": "To use your character, simply use its prefix with a `:` after it, and the text after that. You can use multiple characters in one message.\nExample: `johndoe: Hello, world!`",
-		"title": "Trinity Commands",
-		"Title": "helpEmbed.Title",
-		"Color": "helpEmbed.Color"
-	},
-	"trinityModalTitle": {
-		"createChar": "Create Character",
-		"updateChar": "Update Character"
-	},
-	"charModalLabel": {
-		"color": "Color",
-		"description": "Description",
-		"image": "Image",
-		"music": "Music",
-		"name": "Name",
-		"prefix": "Prefix",
-		"title": "Title",
-		"titleIcon": "Title Icon"
-	},
-	"charModalPlaceholder": {
-		"color": "Color of your character in hexadecimal format",
-		"description": "Description of your character",
-		"image": "Link of your character's image",
-		"name": "Character name",
-		"prefix": "Character prefix"
-	},
-	"charUpdateModalPlaceholder": {
-		"color": "Character's new hexadecimal color with # in the start.",
-		"description": "Character's new description",
-		"image": "Character's new image link",
-		"music": "A new youtube link for the music",
-		"name": "New name for your character",
-		"prefix": "New prefix for your character",
-		"title": "A new title for your character",
-		"titleIcon": "New title icon's image link"
-	},
-	"charUpdateButtonLabel": {
-		"color": "Embed Color",
-		"description": "Description",
-		"image": "Image",
-		"music": "Music",
-		"name": "Name",
-		"prefix": "Prefix",
-		"title": "Title"
-	},
-	"charLikeButton": {
-		"emoji": "👍",
-		"like": "Like"
-	},
-	"successMessage": {
-		"localeChanged": "successMessage.localeChanged"
-	},
-	"interact": {
-		"kiss": "interact.kiss"
-	}
+  "errorMessage": {
+    "alreadyLiked": "You already liked this character.",
+    "cannotLikeMessage": "You cannot like this message.",
+    "characterInvalidImage": "The image of your character is invalid.",
+    "characterInvalidName": "The name of your character is invalid.",
+    "characterNotCreated": "Your character could not be created.",
+    "characterNotFound": "Your character was not found.",
+    "color": "Please insert a color. it should contain a # in the start and 6 hexadecimal chars.",
+    "databaseError": "Error saving your data. This could be caused by a slow request. If you think this is a bug, please contact our support server: https://discord.gg/qc6eKhvN9Z",
+    "fetchError": "Error fetching data. ",
+    "image": "Please insert a valid image link. It must start with https and end with a media extension: .gif, .png, .jpg & etc.",
+    "music": "Please insert a valid youtube link.",
+    "noEditContent": "You didn't offer any content to edit the message with.",
+    "notPostOwner": "You are not the message owner or it is not eligible to be edited.",
+    "prefix": "This prefix already exists in one of your other characters.",
+    "unknownChannel": "Cannot find the channel of the message. Make sure it exists.",
+    "unknownMessage": "Cannot delete or edit an unknown message."
+  },
+  "feedback": {
+    "bite": "**{user} bit {target}**\n{target} was bitten {counter} times.",
+    "characterCreated": "Your character was created successfully.",
+    "characterDeleted": "Your character was deleted successfully.",
+    "characterLiked": "❤️ You liked this character",
+    "characterUpdateMenu": "Updating {character} from {user}.",
+    "characterUpdated": "Your character was updated successfully.",
+    "displayProfile": "Showing {character}'s profile from {user}.",
+    "hug": "**{user} hugged {target}**\n{target} was hugged {counter} times.",
+    "kiss": "**{user} kissed {target}**\n{target} was kissed {counter} times.",
+    "messageEditted": "Message edited successfully.",
+    "postDeleted": "Your post was deleted successfully.",
+    "postUpdated": "Your post was updated successfully.",
+    "punch": "**{user} punched {target}**\n{target} was punched {counter} times.",
+    "slap": "**{user} slapped {target}**\n{target} was slapped {counter} times.",
+    "localeSuccess": "Your preferred locale was updated."
+  },
+  "commandInfo": {
+    "avatar": "Shows the avatar image of an user",
+    "avatarOption": "User you want to see the avatar from",
+    "create": "Creates a character",
+    "delete": "Deletes a playcard post",
+    "deleteCharOption": "Character you want to delete",
+    "deleteMessageOption": "Id of the message you want to delete",
+    "edit": "Edit a playcard post",
+    "editContent": "new playcard post content",
+    "editMessageOption": "Id of the message you want to edit",
+    "help": "Obtain trinity's command list",
+    "locale": "Change the bot's language",
+    "localeOption": "Language you want to change to",
+    "interact": "Interaction commands",
+    "interactBite": "Bite someone",
+    "interactHug": "Hug someone",
+    "interactKiss": "Kiss someone",
+    "interactPunch": "Punch someone",
+    "interactSlap": "Slap someone",
+    "interactUserOption": "User you want to interact with",
+    "managePlaycard": "Playcard management commands",
+    "playcard": "Commands related to character creation/usage.",
+    "profile": "Shows character profile.",
+    "profileCharOption": "Character you want to see the profile from.",
+    "update": "Updates a character.",
+    "updateCharOption": "Character you want to update."
+  },
+  "charEmbedField": {
+    "createdAt": "Created",
+    "letterCount": "Total of Letters",
+    "likes": "Likes",
+    "music": "Music Link",
+    "name": "Name",
+    "posts": "Total of Posts",
+    "title": "Title"
+  },
+  "helpEmbed": {
+    "footerText": "❤️ A bot made with a lot of love from a developer that loves fantasy.",
+    "roleplay": "To use your character, simply use its prefix with a `:` after it, and the text after that. You can use multiple characters in one message.\nExample: `johndoe: Hello, world!`",
+    "title": "Trinity Commands",
+    "Title": "helpEmbed.Title",
+    "Color": "helpEmbed.Color"
+  },
+  "trinityModalTitle": {
+    "createChar": "Create Character",
+    "updateChar": "Update Character"
+  },
+  "charModalLabel": {
+    "color": "Color",
+    "description": "Description",
+    "image": "Image",
+    "music": "Music",
+    "name": "Name",
+    "prefix": "Prefix",
+    "title": "Title",
+    "titleIcon": "Title Icon"
+  },
+  "charModalPlaceholder": {
+    "color": "Color of your character in hexadecimal format",
+    "description": "Description of your character",
+    "image": "Link of your character's image",
+    "name": "Character name",
+    "prefix": "Character prefix"
+  },
+  "charUpdateModalPlaceholder": {
+    "color": "Character's new hexadecimal color with # in the start.",
+    "description": "Character's new description",
+    "image": "Character's new image link",
+    "music": "A new youtube link for the music",
+    "name": "New name for your character",
+    "prefix": "New prefix for your character",
+    "title": "A new title for your character",
+    "titleIcon": "New title icon's image link"
+  },
+  "charUpdateButtonLabel": {
+    "color": "Embed Color",
+    "description": "Description",
+    "image": "Image",
+    "music": "Music",
+    "name": "Name",
+    "prefix": "Prefix",
+    "title": "Title"
+  },
+  "charLikeButton": {
+    "emoji": "👍",
+    "like": "Like"
+  }
 }

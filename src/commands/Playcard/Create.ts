@@ -32,19 +32,25 @@ export class Playcard {
       "pt-BR": i18n.__({
         locale: "pt_br",
         phrase: "commandInfo.create",
-      })
+      }),
     },
     name: "create",
   })
   public async create(interaction: CommandInteraction): Promise<void> {
-    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
     const modal = new TrinityModal().char(locale);
     return interaction.showModal(modal);
   }
 
   @ModalComponent({ id: "char_modal" })
   public async receive(interaction: ModalSubmitInteraction): Promise<Message> {
-    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
     await interaction.deferReply({ ephemeral: true });
     const [name, prefix, image, description, color] = [
       "char_modal_name",
@@ -101,9 +107,11 @@ export class Playcard {
         }),
       });
     }
-    return interaction.editReply(i18n.__({
-      locale,
-      phrase: "errorMessage.databaseError",
-    }));
+    return interaction.editReply(
+      i18n.__({
+        locale,
+        phrase: "errorMessage.databaseError",
+      })
+    );
   }
 }

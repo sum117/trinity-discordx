@@ -105,9 +105,12 @@ export class Interact {
     description: i18n.__("commandInfo.interactPunch"),
     descriptionLocalizations: {
       "en-US": i18n.__("commandInfo.interactPunch"),
-      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.interactPunch" }),
+      "pt-BR": i18n.__({
+        locale: "pt_br",
+        phrase: "commandInfo.interactPunch",
+      }),
     },
-    name: "punch"
+    name: "punch",
   })
   public async punch(
     @SlashOption(slashOptions)

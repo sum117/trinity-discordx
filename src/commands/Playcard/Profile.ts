@@ -40,7 +40,7 @@ export class Playcard {
         phrase: "commandInfo.profile",
       }),
     },
-    name: "profile"
+    name: "profile",
   })
   public async profile(
     @SlashOption({
@@ -60,24 +60,29 @@ export class Playcard {
     char: number,
     interaction: CommandInteraction
   ): Promise<Message | InteractionResponse> {
-    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
     await interaction.deferReply({ ephemeral: true });
     const characters = new Character();
     const character = await characters.getOne(interaction.user.id, char, false);
     if (!character) {
       return interaction.editReply({
-        content: i18n.__({locale, phrase:"errorMessage.characterNotFound"}),
+        content: i18n.__({ locale, phrase: "errorMessage.characterNotFound" }),
       });
     }
     const likeBtnCustomId = `char_like_${character.id}`;
     const likeBtn = new ActionRowBuilder<ButtonBuilder>().setComponents(
       new ButtonBuilder()
         .setCustomId(likeBtnCustomId)
-        .setLabel(i18n.__({locale, phrase: "charLikeButton.like"}))
-        .setEmoji(i18n.__({locale, phrase: "charLikeButton.emoji"}))
+        .setLabel(i18n.__({ locale, phrase: "charLikeButton.like" }))
+        .setEmoji(i18n.__({ locale, phrase: "charLikeButton.emoji" }))
         .setStyle(ButtonStyle.Danger)
     );
-    const embed = new CharEmbedBuilder(interaction.user, character).profile(locale);
+    const embed = new CharEmbedBuilder(interaction.user, character).profile(
+      locale
+    );
 
     const feedback = i18n
       .__("feedback.displayProfile")
@@ -92,7 +97,10 @@ export class Playcard {
 
   @ButtonComponent({ id: /char_like_.+/ })
   public async like(interaction: ButtonInteraction): Promise<Message | void> {
-    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
     await interaction.deferUpdate();
     const characters = new Character();
     const charId = parseInt(interaction.customId.split("_")[2]);
@@ -103,7 +111,7 @@ export class Playcard {
     );
     if (!character) {
       return interaction.editReply({
-        content: i18n.__({locale, phrase:"errorMessage.databaseError"}),
+        content: i18n.__({ locale, phrase: "errorMessage.databaseError" }),
       });
     }
     // Disable like button
@@ -116,16 +124,18 @@ export class Playcard {
     const likedChar = await characters.addLike(charId, interaction.user.id);
     if (!likedChar) {
       return interaction.followUp({
-        content: i18n.__({locale, phrase:"errorMessage.alreadyLiked"}),
+        content: i18n.__({ locale, phrase: "errorMessage.alreadyLiked" }),
       });
     }
-    const embed = new CharEmbedBuilder(interaction.user, likedChar).profile(locale);
+    const embed = new CharEmbedBuilder(interaction.user, likedChar).profile(
+      locale
+    );
     const feedback = i18n
       .__("feedback.displayProfile")
       .replace("{character}", character.name)
       .replace("{user}", userMention(character.authorId));
     await interaction.followUp({
-      content: i18n.__({locale, phrase: "feedback.characterLiked"}),
+      content: i18n.__({ locale, phrase: "feedback.characterLiked" }),
       ephemeral: true,
     });
     return interaction.editReply({
@@ -142,11 +152,14 @@ export class Playcard {
   public async likeContext(
     interaction: MessageContextMenuCommandInteraction
   ): Promise<InteractionResponse> {
-    const locale = (await new UserLocale().get(interaction.user.id)) ?? interaction.guild?.preferredLocale ?? "en";
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
     const embedFooterText = interaction.targetMessage.embeds?.[0]?.footer?.text;
     if (!embedFooterText) {
       return interaction.reply({
-        content: i18n.__({locale, phrase:"errorMessage.cannotLikeMessage"}),
+        content: i18n.__({ locale, phrase: "errorMessage.cannotLikeMessage" }),
         ephemeral: true,
       });
     }
@@ -154,7 +167,7 @@ export class Playcard {
     const charId = parseInt(embedFooterText.match(idRegex)?.[1] ?? "");
     if (!charId) {
       return interaction.reply({
-        content: i18n.__({locale, phrase: "errorMessage.cannotLikeMessage"}),
+        content: i18n.__({ locale, phrase: "errorMessage.cannotLikeMessage" }),
         ephemeral: true,
       });
     }
@@ -166,19 +179,19 @@ export class Playcard {
     );
     if (!character) {
       return interaction.reply({
-        content: i18n.__({locale, phrase:"errorMessage.characterNotFound"}),
+        content: i18n.__({ locale, phrase: "errorMessage.characterNotFound" }),
         ephemeral: true,
       });
     }
     const likedChar = await characters.addLike(charId, interaction.user.id);
     if (!likedChar) {
       return interaction.reply({
-        content: i18n.__({locale, phrase: "errorMessage.alreadyLiked"}),
+        content: i18n.__({ locale, phrase: "errorMessage.alreadyLiked" }),
         ephemeral: true,
       });
     }
     return interaction.reply({
-      content: i18n.__({locale, phrase: "feedback.characterLiked"}),
+      content: i18n.__({ locale, phrase: "feedback.characterLiked" }),
       ephemeral: true,
     });
   }
