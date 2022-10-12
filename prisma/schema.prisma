@@ -17,7 +17,10 @@ model User {
   gifInteraction GifInteraction?
   locale         String?
 }
-
+model Server {
+  id String @id @unique
+  isOffTopicDeleting Boolean @default(false)
+}
 model Post {
   messageId String @id @unique
   channelId String
