@@ -14,6 +14,10 @@ export class UserLocale extends Base {
     return user?.locale ?? "en";
   }
   public async set(id: Snowflake, locale: string): Promise<void> {
-    await this.prisma.user.update({ data: { locale }, where: { id } });
+    await this.prisma.user.upsert({
+      create: { id, locale },
+      update: { locale },
+      where: { id },
+    });
   }
 }

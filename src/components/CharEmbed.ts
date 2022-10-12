@@ -24,7 +24,7 @@ export class CharEmbedBuilder extends EmbedBuilder {
     this.setTimestamp(Date.now());
   }
 
-  private _getTime(locale:string) {
+  private _getTime(locale: string) {
     // Time in days
     const formattedLocale = locale.replace(/_/g, "-").toLowerCase();
     const formatter = new Intl.RelativeTimeFormat(formattedLocale);

@@ -25,6 +25,7 @@ import {
 
 import { Character, UserLocale } from "../../../prisma/queries";
 import { CharEmbedBuilder } from "../../components/CharEmbed";
+import type { CharUpdateOptions } from "../../types/interfaces";
 import { i18n } from "../../util/i18n";
 import { Util } from "../../util/Util";
 
@@ -74,7 +75,7 @@ export class Playcard {
     );
 
     const getBtnCustomId = (option: string) =>
-      `char_update_modal_${option.toLowerCase()}_${char}`;
+      `char_update_modal_${option}_${char}`;
     const firstRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
       new ButtonBuilder()
         .setCustomId(getBtnCustomId("name"))
@@ -109,12 +110,26 @@ export class Playcard {
         .setLabel(i18n.__({ locale, phrase: "charUpdateButtonLabel.music" }))
         .setStyle(ButtonStyle.Primary),
     ]);
+    const thirdRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
+      new ButtonBuilder()
+        .setCustomId(`char_remove_title_${char}`)
+        .setLabel(i18n.__({ locale, phrase: "charUpdateButtonLabel.title" }))
+        .setDisabled(!character.title?.name)
+        .setEmoji("🗑️")
+        .setStyle(ButtonStyle.Danger),
+      new ButtonBuilder()
+        .setCustomId(`char_remove_music_${char}`)
+        .setLabel(i18n.__({ locale, phrase: "charUpdateButtonLabel.music" }))
+        .setDisabled(!character.music)
+        .setEmoji("🗑️")
+        .setStyle(ButtonStyle.Danger),
+    ]);
     const feedback = i18n
       .__({ locale, phrase: "feedback.characterUpdateMenu" })
       .replace("{character}", character.name)
       .replace("{user}", interaction.user.toString());
     return interaction.editReply({
-      components: [firstRow, secondRow],
+      components: [firstRow, secondRow, thirdRow],
       content: feedback,
       embeds: [embed],
     });
@@ -186,6 +201,44 @@ export class Playcard {
       .setComponents(normalInput);
     return interaction.showModal(modal);
   }
+  @ButtonComponent({ id: /char_remove_.+/ })
+  public async removeButton(
+    interaction: ButtonInteraction
+  ): Promise<Message | void> {
+    await interaction.deferReply({ ephemeral: true });
+    const locale =
+      (await new UserLocale().get(interaction.user.id)) ??
+      interaction.guild?.preferredLocale ??
+      "en";
+    const [option, charId] = interaction.customId
+      .replace("char_remove_", "")
+      .split("_");
+
+    const charUpdateOptions = {} as CharUpdateOptions;
+    if (option === "title") {
+      charUpdateOptions[option] = null;
+    } else if (option === "music") {
+      charUpdateOptions[option] = null;
+    }
+
+    const updatedChar = await new Character().updateChar(
+      interaction.user.id,
+      parseInt(charId),
+      charUpdateOptions
+    );
+    if (!updatedChar) {
+      return interaction.editReply({
+        content: i18n.__({ locale, phrase: "errorMessage.databaseError" }),
+      });
+    }
+    const embed = new CharEmbedBuilder(interaction.user, updatedChar).profile(
+      locale
+    );
+    return interaction.editReply({
+      content: i18n.__({ locale, phrase: "feedback.characterUpdated" }),
+      embeds: [embed],
+    });
+  }
   @ModalComponent({ id: /char_update_modal_.+/ })
   public async updateModal(
     interaction: ModalSubmitInteraction
@@ -210,7 +263,7 @@ export class Playcard {
       }
       const updatedChar = await characterDatabase.updateChar(
         interaction.user.id,
-        Number(charId),
+        parseInt(charId),
         {
           title: {
             iconURL: titleIcon,
@@ -278,7 +331,7 @@ export class Playcard {
     }
     const updatedChar = await characterDatabase.updateChar(
       interaction.user.id,
-      Number(charId),
+      parseInt(charId),
       {
         [option]: interaction.fields.getTextInputValue(interaction.customId),
       }
