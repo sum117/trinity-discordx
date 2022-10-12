@@ -85,9 +85,7 @@ export class Playcard {
     );
 
     const feedback = i18n
-      .__("feedback.displayProfile")
-      .replace("{character}", character.name)
-      .replace("{user}", userMention(character.authorId));
+      .__mf({locale, phrase: "feedback.displayProfile"}, {character: character.name, user: userMention(character.authorId)});
     return interaction.editReply({
       components: [likeBtn],
       content: feedback,

@@ -29,6 +29,7 @@ export class Utilities {
       },
       name: "locale",
       type: ApplicationCommandOptionType.String,
+      required: true,
     })
     locale: string,
     interaction: CommandInteraction
