@@ -27,11 +27,21 @@ export interface CharUpdateOptions {
   color?: string;
   description?: string;
   image?: string;
-  music?: string;
+  music?: string | null;
   name?: string;
   prefix?: string;
   title?: {
     iconURL: string;
     name: string;
-  };
+  } | null;
+}
+
+export interface CharListOptions {
+  id: number;
+  isMostUsed?: boolean;
+  letterCount: number;
+  likeCount: number;
+  name: string;
+  postCount: number;
+  prefix: string;
 }

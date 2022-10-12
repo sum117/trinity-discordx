@@ -243,7 +243,21 @@ export class Character extends Base {
         });
         delete options.title;
       }
-      return this.prisma.char.update({
+      if (options.title === null) {
+        const title = await this.prisma.charTitle.findFirst({
+          where: {
+            charId: charId,
+          },
+        });
+        if (title) {
+          await this.prisma.charTitle.delete({
+            where: {
+              charId: charId,
+            },
+          });
+        }
+      }
+      const updatedChar = await this.prisma.char.update({
         data: {
           color: options.color,
           description: options.description,
@@ -260,6 +274,8 @@ export class Character extends Base {
           id: charId,
         },
       });
+
+      return updatedChar;
     }
   }
 }
