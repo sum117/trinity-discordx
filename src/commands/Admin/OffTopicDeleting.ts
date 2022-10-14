@@ -10,7 +10,7 @@ import { i18n } from "../../util/i18n";
   description: i18n.__("commandInfo.admin"),
   descriptionLocalizations: {
     "en-US": i18n.__("commandInfo.admin"),
-    "pt-BR": i18n.__({locale: "pt_br", phrase:"commandInfo.admin"}),
+    "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.admin" }),
   },
   name: "admin",
 })
@@ -18,6 +18,13 @@ import { i18n } from "../../util/i18n";
 export class Admin {
   @Slash({
     description: i18n.__("commandInfo.toggleDeleteOffTopic"),
+    descriptionLocalizations: {
+      "en-US": i18n.__("commandInfo.toggleDeleteOffTopic"),
+      "pt-BR": i18n.__({
+        locale: "pt_br",
+        phrase: "commandInfo.toggleDeleteOffTopic",
+      }),
+    },
     name: "toggle_delete_off_topic",
   })
   public async toggleDeleteOffTopic(
