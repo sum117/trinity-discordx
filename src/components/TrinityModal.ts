@@ -12,7 +12,7 @@ export class TrinityModal extends ModalBuilder {
     super();
   }
 
-  public char(locale = "en"): this {
+  public char(locale = "en", charImage?: string): this {
     this.setCustomId("char_modal");
     this.setTitle(i18n.__({ locale, phrase: "trinityModalTitle.createChar" }));
     const inputs = [
@@ -42,7 +42,8 @@ export class TrinityModal extends ModalBuilder {
         )
         .setMaxLength(256)
         .setRequired(true)
-        .setStyle(TextInputStyle.Short),
+        .setStyle(TextInputStyle.Short)
+        .setValue(charImage ?? ""),
       new TextInputBuilder()
         .setCustomId("char_modal_description")
         .setLabel(i18n.__({ locale, phrase: "charModalLabel.description" }))

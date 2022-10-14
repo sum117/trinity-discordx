@@ -1,9 +1,17 @@
 import type {
+  Attachment,
   CommandInteraction,
   Message,
   ModalSubmitInteraction,
 } from "discord.js";
-import { Discord, ModalComponent, Slash, SlashGroup } from "discordx";
+import { ApplicationCommandOptionType } from "discord.js";
+import {
+  Discord,
+  ModalComponent,
+  Slash,
+  SlashGroup,
+  SlashOption,
+} from "discordx";
 
 import { Character, UserLocale } from "../../../prisma/queries";
 import { TrinityModal } from "../../components/TrinityModal";
@@ -12,7 +20,7 @@ import { Util } from "../../util/Util";
 
 @Discord()
 @SlashGroup({
-  description: "commandInfo.managePlaycard",
+  description: i18n.__("commandInfo.managePlaycard"),
   descriptionLocalizations: {
     "en-US": i18n.__("commandInfo.managePlaycard"),
     "pt-BR": i18n.__({
@@ -36,12 +44,28 @@ export class Playcard {
     },
     name: "create",
   })
-  public async create(interaction: CommandInteraction): Promise<void> {
+  public async create(
+    @SlashOption({
+      description: i18n.__("commandInfo.createOption"),
+      descriptionLocalizations: {
+        "en-US": i18n.__("commandInfo.createOption"),
+        "pt-BR": i18n.__({
+          locale: "pt_br",
+          phrase: "commandInfo.createOption",
+        }),
+      },
+      name: "image",
+      required: false,
+      type: ApplicationCommandOptionType.Attachment,
+    })
+    charImage: Attachment,
+    interaction: CommandInteraction
+  ): Promise<void> {
     const locale =
       (await new UserLocale().get(interaction.user.id)) ??
       interaction.guild?.preferredLocale ??
       "en";
-    const modal = new TrinityModal().char(locale);
+    const modal = new TrinityModal().char(locale, charImage?.proxyURL);
     return interaction.showModal(modal);
   }
 
