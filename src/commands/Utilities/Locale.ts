@@ -28,8 +28,8 @@ export class Utilities {
         }),
       },
       name: "locale",
-      type: ApplicationCommandOptionType.String,
       required: true,
+      type: ApplicationCommandOptionType.String,
     })
     locale: string,
     interaction: CommandInteraction

@@ -1,9 +1,14 @@
 import type {
+  BaseMessageOptions,
   CommandInteraction,
   InteractionResponse,
   Message,
 } from "discord.js";
-import { ApplicationCommandOptionType, EmbedBuilder } from "discord.js";
+import {
+  ApplicationCommandOptionType,
+  AttachmentBuilder,
+  EmbedBuilder,
+} from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
 import { Character, UserLocale } from "../../../prisma/queries";
@@ -157,7 +162,20 @@ export class Playcard {
       await interaction.editReply(
         i18n.__({ locale, phrase: "feedback.messageEditted" })
       );
-      return message.edit({ embeds: [embedToEdit] });
+
+      // In case attachment exists, handle it too
+      const reply: BaseMessageOptions = {};
+      if (embedToEdit.data.image?.url) {
+        const attachment = new AttachmentBuilder(
+          embedToEdit.data.image.url
+        ).setName(
+          embedToEdit.data.image.url.split("/").pop() ?? "new_image.png"
+        );
+        reply.files = [attachment];
+        embedToEdit.setImage(`attachment://${attachment.name}`);
+      }
+      reply.embeds = [embedToEdit];
+      return message.edit(reply);
     } else if (method === "DELETE") {
       await characters
         .deletePost(messageId)
