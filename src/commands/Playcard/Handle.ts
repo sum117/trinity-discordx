@@ -69,12 +69,12 @@ export class Playcard {
   }
 
   @Slash({
-    description: i18n.__("commandInfo.delete"),
+    description: i18n.__("commandInfo.deletePost"),
     descriptionLocalizations: {
-      "en-US": i18n.__("commandInfo.delete"),
-      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.delete" }),
+      "en-US": i18n.__("commandInfo.deletePost"),
+      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.deletePost" }),
     },
-    name: "delete",
+    name: "delete_post",
   })
   async delete(
     @SlashOption({

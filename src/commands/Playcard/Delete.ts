@@ -10,12 +10,12 @@ import { Util } from "../../util/Util";
 @SlashGroup("char", "playcard")
 export class Playcard {
   @Slash({
-    description: i18n.__("commandInfo.deletePost"),
+    description: i18n.__("commandInfo.delete"),
     descriptionLocalizations: {
-      "en-US": i18n.__("commandInfo.deletePost"),
-      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.deletePost" }),
+      "en-US": i18n.__("commandInfo.delete"),
+      "pt-BR": i18n.__({ locale: "pt_br", phrase: "commandInfo.delete" }),
     },
-    name: "delete_post",
+    name: "delete",
   })
   public async delete(
     @SlashOption({
