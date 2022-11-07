@@ -34,7 +34,7 @@ export class Utilities {
       .setTitle(i18n.__({ locale, phrase: "helpEmbed.title" }))
       .setColor("Random")
       .setFooter({
-        text: i18n.__("helpEmbed.footerText"),
+        text: i18n.__({ locale, phrase: "helpEmbed.footerText" }),
       })
       .setDescription(
         i18n.__({ locale, phrase: "helpEmbed.roleplay" }) + "\n\n" + string
