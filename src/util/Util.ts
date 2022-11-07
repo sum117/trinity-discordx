@@ -56,4 +56,25 @@ export class Util {
       interaction.respond(charSelector);
     });
   };
+  public static diffPercentage = (
+    newInput: string,
+    oldInput: string
+  ): number => {
+    const firstArray = oldInput.split("");
+    const secondArray = newInput.split("");
+
+    const biggestArray =
+      firstArray.length > secondArray.length ? firstArray : secondArray;
+    const smallestArray =
+      secondArray === biggestArray ? firstArray : secondArray;
+
+    let count = 0;
+    for (const letter of smallestArray) {
+      if (biggestArray.includes(letter)) {
+        count++;
+      }
+    }
+
+    return Math.floor((count / biggestArray.length) * 100);
+  };
 }

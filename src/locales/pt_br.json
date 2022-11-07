@@ -30,6 +30,7 @@
     "kiss": "**{user} beijou {target}**\n{target} foi beijado(a) {counter} vezes.",
     "localeSuccess": "O seu idioma preferido foi atualizado.",
     "messageEditted": "Mensagem editada com sucesso.",
+    "messageDiffEdit": "**BETA**: Um post foi editado com o conteúdo da sua mensagem por ser 80% igual.",
     "postDeleted": "Seu post foi excluído com sucesso.",
     "postUpdated": "Seu post foi atualizado com sucesso.",
     "punch": "**{user} deu um soco em {target}**\n{target} foi socado(a) {counter} vezes.",

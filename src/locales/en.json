@@ -30,6 +30,7 @@
     "kiss": "**{user} kissed {target}**\n{target} was kissed {counter} times.",
     "localeSuccess": "Your preferred locale was updated.",
     "messageEditted": "Message edited successfully.",
+    "messageDiffEdit": "**BETA**: One of your last posts were edited for being 80% similar to this one.",
     "postDeleted": "Your post was deleted successfully.",
     "postUpdated": "Your post was updated successfully.",
     "punch": "**{user} punched {target}**\n{target} was punched {counter} times.",
