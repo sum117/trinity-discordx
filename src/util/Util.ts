@@ -57,24 +57,49 @@ export class Util {
     });
   };
   public static diffPercentage = (
-    newInput: string,
-    oldInput: string
+    str1: string,
+    str2: string
   ): number => {
-    const firstArray = oldInput.split("");
-    const secondArray = newInput.split("");
-
-    const biggestArray =
-      firstArray.length > secondArray.length ? firstArray : secondArray;
-    const smallestArray =
-      secondArray === biggestArray ? firstArray : secondArray;
-
-    let count = 0;
-    for (const letter of smallestArray) {
-      if (biggestArray.includes(letter)) {
-        count++;
+    const matchDestructively = (str1 = '', str2 = '') => {
+      str1 = str1.toLowerCase();
+      str2 = str2.toLowerCase();
+      let arr = new Array();
+      for (let i = 0; i <= str1.length; i++) {
+        let lastValue = i;
+        for (let j = 0; j <= str2.length; j++) {
+          if (i === 0) {
+            arr[j] = j;
+          } else if (j > 0) {
+            let newValue = arr[j - 1];
+            if (str1.charAt(i - 1) !== str2.charAt(j - 1)) {
+              newValue = Math.min(Math.min(newValue, lastValue), arr[j]) + 1;
+            }
+            arr[j - 1] = lastValue; lastValue = newValue;
+          }
+        }
+        if (i > 0) {
+          arr[str2.length] = lastValue;
+        }
       }
-    }
+      return arr[str2.length];
+    };
 
-    return Math.floor((count / biggestArray.length) * 100);
-  };
+    const calculateSimilarity = (str1 = '', str2 = '') => {
+      // Get the length of the strings
+      let longer = str1;
+      let shorter = str2;
+      if (str1.length < str2.length) {
+        longer = str2; shorter = str1;
+      }
+      let longerLength = longer.length;
+      if (longerLength === 0) {
+        return 1;
+      }
+      // Calculate the edit distance
+      return +((longerLength - matchDestructively(longer, shorter)) / longerLength * 100).toFixed(2);
+    };
+
+
+    return calculateSimilarity(str1, str2);
+  }
 }
