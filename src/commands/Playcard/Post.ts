@@ -152,7 +152,8 @@ export class Playcard {
         if (diffPercentage > 80) {
           const newEmbed = EmbedBuilder.from(oldMessage.embeds[0]);
           newEmbed.setDescription(newContent);
-          await oldMessage.edit({ embeds: [newEmbed] });
+          const reply = Util.handleAttachment(newEmbed);
+          await oldMessage.edit(reply);
           return true;
         }
         return false;

@@ -13,6 +13,7 @@ import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
 import { Character, UserLocale } from "../../../prisma/queries";
 import { i18n } from "../../util/i18n";
+import { Util } from "../../util/Util";
 
 @Discord()
 @SlashGroup({
@@ -164,17 +165,7 @@ export class Playcard {
       );
 
       // In case attachment exists, handle it too
-      const reply: BaseMessageOptions = {};
-      if (embedToEdit.data.image?.url) {
-        const attachment = new AttachmentBuilder(
-          embedToEdit.data.image.url
-        ).setName(
-          embedToEdit.data.image.url.split("/").pop() ?? "new_image.png"
-        );
-        reply.files = [attachment];
-        embedToEdit.setImage(`attachment://${attachment.name}`);
-      }
-      reply.embeds = [embedToEdit];
+      const reply = Util.handleAttachment(embedToEdit);
       return message.edit(reply);
     } else if (method === "DELETE") {
       await characters

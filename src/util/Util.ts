@@ -1,4 +1,9 @@
-import type { AutocompleteInteraction } from "discord.js";
+import type {
+  AutocompleteInteraction,
+  BaseMessageOptions,
+  EmbedBuilder,
+} from "discord.js";
+import { AttachmentBuilder } from "discord.js";
 
 import { Character } from "../../prisma/queries";
 
@@ -56,14 +61,11 @@ export class Util {
       interaction.respond(charSelector);
     });
   };
-  public static diffPercentage = (
-    str1: string,
-    str2: string
-  ): number => {
-    const matchDestructively = (str1 = '', str2 = '') => {
+  public static diffPercentage = (str1: string, str2: string): number => {
+    const matchDestructively = (str1 = "", str2 = "") => {
       str1 = str1.toLowerCase();
       str2 = str2.toLowerCase();
-      let arr = new Array();
+      const arr = [];
       for (let i = 0; i <= str1.length; i++) {
         let lastValue = i;
         for (let j = 0; j <= str2.length; j++) {
@@ -74,7 +76,8 @@ export class Util {
             if (str1.charAt(i - 1) !== str2.charAt(j - 1)) {
               newValue = Math.min(Math.min(newValue, lastValue), arr[j]) + 1;
             }
-            arr[j - 1] = lastValue; lastValue = newValue;
+            arr[j - 1] = lastValue;
+            lastValue = newValue;
           }
         }
         if (i > 0) {
@@ -84,22 +87,40 @@ export class Util {
       return arr[str2.length];
     };
 
-    const calculateSimilarity = (str1 = '', str2 = '') => {
+    const calculateSimilarity = (str1 = "", str2 = "") => {
       // Get the length of the strings
       let longer = str1;
       let shorter = str2;
       if (str1.length < str2.length) {
-        longer = str2; shorter = str1;
+        longer = str2;
+        shorter = str1;
       }
-      let longerLength = longer.length;
+      const longerLength = longer.length;
       if (longerLength === 0) {
         return 1;
       }
       // Calculate the edit distance
-      return +((longerLength - matchDestructively(longer, shorter)) / longerLength * 100).toFixed(2);
+      return +(
+        ((longerLength - matchDestructively(longer, shorter)) / longerLength) *
+        100
+      ).toFixed(2);
     };
 
-
     return calculateSimilarity(str1, str2);
-  }
+  };
+
+  public static handleAttachment = (
+    embedToEdit: EmbedBuilder
+  ): BaseMessageOptions => {
+    const reply: BaseMessageOptions = {};
+    if (embedToEdit.data.image?.url) {
+      const attachment = new AttachmentBuilder(
+        embedToEdit.data.image.url
+      ).setName(embedToEdit.data.image.url.split("/").pop() ?? "new_image.png");
+      reply.files = [attachment];
+      embedToEdit.setImage(`attachment://${attachment.name}`);
+    }
+    reply.embeds = [embedToEdit];
+    return reply;
+  };
 }
