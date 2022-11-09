@@ -69,7 +69,7 @@ export class Playcard {
         const editedMessages = await this.dynamicEdit(
           message.channel as TextChannel,
           message,
-          replyEmbed.data.description ?? ""
+          replyEmbed?.data.description ?? ""
         );
         if (editedMessages.length > 0) {
           const unknownMessageError = i18n.__({
