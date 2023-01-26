@@ -1,12 +1,10 @@
 import type {
-  BaseMessageOptions,
   CommandInteraction,
   InteractionResponse,
   Message,
 } from "discord.js";
 import {
   ApplicationCommandOptionType,
-  AttachmentBuilder,
   EmbedBuilder,
 } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
