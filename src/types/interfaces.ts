@@ -45,3 +45,12 @@ export interface CharListOptions {
   postCount: number;
   prefix: string;
 }
+
+export interface UserProfileProps {
+  avatar: string;
+  characters: number;
+  letters: number;
+  likes: number;
+  name: string;
+  posts: number;
+}
