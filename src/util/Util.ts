@@ -46,8 +46,9 @@ export class Util {
   public static getCharAutoComplete = (
     interaction: AutocompleteInteraction
   ): void => {
+    const userInput = interaction.options.getFocused();
     new Character().getAll(interaction.user.id).then((chars) => {
-      const charSelector = chars.map((char) => {
+      const charSelector = chars.filter((char) => char.name.includes(userInput)).map((char) => {
         if (!char) {
           return { name: "N/A", value: 0 };
         }

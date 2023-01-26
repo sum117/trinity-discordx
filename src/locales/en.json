@@ -1,6 +1,6 @@
 {
   "errorMessage": {
-    "alreadyLiked": "You already liked this character.",
+    "alreadyLiked": "You already liked this character",
     "cannotLikeMessage": "You cannot like this message.",
     "characterInvalidImage": "The image of your character is invalid.",
     "characterInvalidName": "The name of your character is invalid.",
@@ -72,7 +72,9 @@
     "profileCharOption": "Character you want to see the profile from.",
     "toggleDeleteOffTopic": "Toggle the deletion of off-topic messages.",
     "update": "Updates a character.",
-    "updateCharOption": "Character you want to update."
+    "updateCharOption": "Character you want to update.",
+    "userProfile": "Shows user profile.",
+    "userProfileOption": "User you want to see the profile from."
   },
   "charEmbedField": {
     "createdAt": "Created",

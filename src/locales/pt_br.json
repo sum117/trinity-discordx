@@ -1,6 +1,6 @@
 {
   "errorMessage": {
-    "alreadyLiked": "Você já deu like nesse personagem.",
+    "alreadyLiked": "Você já deu like nesse personagem",
     "cannotLikeMessage": "Você não pode dar like em uma mensagem.",
     "characterInvalidImage": "A imagem do(a) seu/sua personagem não é válida.",
     "characterInvalidName": "O nome do(a) seu/sua personagem não é válido.",
@@ -22,7 +22,7 @@
     "bite": "**{user} mordeu {target}**\n{target} foi mordido(a) {counter} vezes.",
     "characterCreated": "Seu/Sua personagem foi criado com sucesso.",
     "characterDeleted": "Seu/Sua personagem foi excluído com sucesso.",
-    "characterLiked": "❤️ Você deu uma curtida neste personagem!",
+    "characterLiked": "❤️ Você deu uma curtida neste personagem",
     "characterUpdateMenu": "Atualizando o(a) personagem de {character} de {user}.",
     "characterUpdated": "Seu/Sua personagem foi atualizado com sucesso.",
     "displayProfile": "Exibindo perfil do(a) personagem {character} de {user}.",
@@ -72,7 +72,9 @@
     "profileCharOption": "Personagem que você deseja ver o perfil.",
     "toggleDeleteOffTopic": "Ativa ou desativa a exclusão de mensagens fora do tópico do RP.",
     "update": "Atualiza um personagem.",
-    "updateCharOption": "Personagem que você deseja atualizar."
+    "updateCharOption": "Personagem que você deseja atualizar.",
+    "userProfile": "Mostra o perfil de um usuário.",
+    "userProfileOption": "Usuário de quem você quer ver o perfil."
   },
   "charEmbedField": {
     "createdAt": "Criado",
