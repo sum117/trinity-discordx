@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import type {
   Attachment,
   CommandInteraction,
@@ -12,6 +13,7 @@ import {
   SlashGroup,
   SlashOption,
 } from "discordx";
+import imgurPkg from "imgur";
 
 import { Character, UserLocale } from "../../../prisma/queries";
 import { TrinityModal } from "../../components/TrinityModal";
@@ -65,7 +67,21 @@ export class Playcard {
       (await new UserLocale().get(interaction.user.id)) ??
       interaction.guild?.preferredLocale ??
       "en";
-    const modal = new TrinityModal().char(locale, charImage?.proxyURL);
+    const { ImgurClient } = imgurPkg;
+    const imgur = new ImgurClient({
+      clientId: process.env.IMGUR_CLIENT_ID,
+      clientSecret: process.env.IMGUR_CLIENT_SECRET,
+    });
+    let image = charImage?.proxyURL;
+    if (charImage) {
+      const uploadedImage = await imgur.upload({
+        description: Intl.DateTimeFormat("pt-BR").format(new Date()),
+        image: charImage.proxyURL,
+        title: crypto.randomUUID(),
+      });
+      image = uploadedImage.data.link;
+    }
+    const modal = new TrinityModal().char(locale, image);
     return interaction.showModal(modal);
   }
 
