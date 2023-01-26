@@ -64,7 +64,7 @@ export class Playcard {
       (await new UserLocale().get(interaction.user.id)) ??
       interaction.guild?.preferredLocale ??
       "en";
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ ephemeral: false });
     const characters = new Character();
     const character = await characters.getOne(interaction.user.id, char, false);
     if (!character) {
@@ -118,13 +118,13 @@ export class Playcard {
     const apiBtn = interaction.message.components[0]
       .components[0] as APIButtonComponent;
     const likeBtn = new ActionRowBuilder<ButtonBuilder>().setComponents(
-      ButtonBuilder.from(apiBtn).setDisabled(true)
+      ButtonBuilder.from(apiBtn).setDisabled(false)
     );
     // Manage like
     const likedChar = await characters.addLike(charId, interaction.user.id);
     if (!likedChar) {
       return interaction.followUp({
-        content: i18n.__({ locale, phrase: "errorMessage.alreadyLiked" }),
+        content: `<@${interaction.user.id}> ` + i18n.__({ locale, phrase: "errorMessage.alreadyLiked" }) + `: ${character.name}`,
       });
     }
     const embed = new CharEmbedBuilder(interaction.user, likedChar).profile(
@@ -135,8 +135,8 @@ export class Playcard {
       .replace("{character}", character.name)
       .replace("{user}", userMention(character.authorId));
     await interaction.followUp({
-      content: i18n.__({ locale, phrase: "feedback.characterLiked" }),
-      ephemeral: true,
+      content: `<@${interaction.user.id}> ` + i18n.__({ locale, phrase: "feedback.characterLiked" }) + `: ${character.name}`,
+      ephemeral: false,
     });
     return interaction.editReply({
       components: [likeBtn],
