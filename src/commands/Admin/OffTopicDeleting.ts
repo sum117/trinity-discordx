@@ -76,7 +76,6 @@ export class Admin {
         message.content.startsWith("(") ||
         message.content.startsWith(")");
       if (offTopic && message.guildId) {
-        const locale = message.guild?.preferredLocale ?? "en";
         const server = await new Server().get(message.guildId);
         if (server?.isOffTopicDeleting) {
           setTimeout(() => {
@@ -84,7 +83,7 @@ export class Admin {
               .delete()
               .catch(() =>
                 console.log(
-                  i18n.__({ locale, phrase: "errorMessage.unknownMessage" })
+                  "Cannot delete unknown message, probably already deleted."
                 )
               );
           }, 3 * 60 * 1000);
