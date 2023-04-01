@@ -12,12 +12,14 @@
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
-    "skipLibCheck": false,
-    "forceConsistentCasingInFileNames": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
   "ts-node": {
     "experimentalSpecifierResolution": "node"
   },
+
+  "include": ["src/**/*.json", "src/**/*", "prisma/**/*"],
   "exclude": ["build", "node_modules"]
 }

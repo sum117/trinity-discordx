@@ -1,12 +1,15 @@
 import fs from "fs";
+import path from "path";
 import satori from "satori";
 import { html as __html } from "satori-html";
 import sharp from "sharp";
+import { fileURLToPath } from "url";
 
 import type { UserProfileProps } from "../types/interfaces";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const robotoArrayBuffer = new Uint8Array(
-  fs.readFileSync("./src/util/Roboto-Regular.ttf")
+  fs.readFileSync(path.join(__dirname, "Roboto-Regular.ttf"))
 ).buffer;
 
 export default async function main(user: UserProfileProps): Promise<Buffer> {

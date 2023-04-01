@@ -2,6 +2,11 @@ version: "3"
 services:
   app:
     build: .
-    command: node build/main.js
+    command: npm run start
+    volumes:
+      - ./prisma/dev.db:/app/prisma/dev.db
     environment:
       - BOT_TOKEN=${BOT_TOKEN}
+      - DATABASE_URL=${DATABASE_URL}
+      - IMGUR_CLIENT_ID=${IMGUR_CLIENT_ID}
+      - IMGUR_CLIENT_SECRET=${IMGUR_CLIENT_SECRET}

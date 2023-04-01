@@ -67,7 +67,8 @@ export class Playcard {
       (await new UserLocale().get(interaction.user.id)) ??
       interaction.guild?.preferredLocale ??
       "en";
-    const { ImgurClient } = imgurPkg;
+    // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+    const { ImgurClient } = imgurPkg as unknown as typeof import("imgur");
     const imgur = new ImgurClient({
       clientId: process.env.IMGUR_CLIENT_ID,
       clientSecret: process.env.IMGUR_CLIENT_SECRET,

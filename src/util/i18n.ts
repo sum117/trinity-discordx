@@ -1,8 +1,11 @@
 import i18n from "i18n";
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 i18n.configure({
   defaultLocale: "en",
-  directory: "src/locales",
+  directory: path.join(__dirname, "..", "locales"),
   locales: ["en", "pt_br"],
   logErrorFn: function (msg: string) {
     console.log(msg);
