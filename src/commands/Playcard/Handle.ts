@@ -3,10 +3,7 @@ import type {
   InteractionResponse,
   Message,
 } from "discord.js";
-import {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-} from "discord.js";
+import { ApplicationCommandOptionType, EmbedBuilder } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
 import { Character, UserLocale } from "../../../prisma/queries";

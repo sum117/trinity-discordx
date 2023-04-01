@@ -22,7 +22,7 @@ export class Playcard {
         ? message.attachments.map((attachment, index) => {
             const extension: string = attachment.name?.split(".").pop() ?? "";
             const attachmentName = `image_${index}.${extension ?? "png"}`;
-            return new AttachmentBuilder(attachment.attachment).setName(
+            return new AttachmentBuilder(attachment.url).setName(
               attachmentName
             );
           })
@@ -30,7 +30,9 @@ export class Playcard {
 
     const characters = new Character();
     const charDatabase = await characters.getAll(message.author.id);
-    const charPrefixes = charDatabase.map((char) => char.prefix + ":");
+    const charPrefixes = charDatabase.map(
+      (char) => Util.escapeRegExp(char.prefix) + ":"
+    );
     const splitRegex = new RegExp(charPrefixes.join("|"), "g");
     const charActions = message.content.split(splitRegex).slice(1);
     const charMatches = message.content.match(splitRegex);

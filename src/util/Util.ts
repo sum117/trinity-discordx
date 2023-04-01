@@ -16,6 +16,10 @@ export class Util {
   public static randomIndex = (arr: any[]): any =>
     arr[Math.floor(Math.random() * arr.length)];
 
+  public static escapeRegExp(toEscape: string): string {
+    return toEscape.replace(/[.*+\-?^${}()|[\]\\]/g, "\\$&"); // $& significa a correspondência inteira
+  }
+
   public static titleCase = (str: string): string =>
     str
       .split(" ")
@@ -48,17 +52,19 @@ export class Util {
   ): void => {
     const userInput = interaction.options.getFocused();
     new Character().getAll(interaction.user.id).then((chars) => {
-      const charSelector = chars.filter((char) => char.name.includes(userInput)).map((char) => {
-        if (!char) {
-          return { name: "N/A", value: 0 };
-        }
-        const formattedCharName =
-          char.name.length > 100 ? char.name.slice(0, 94) + "..." : char.name;
-        return {
-          name: formattedCharName,
-          value: char.id,
-        };
-      });
+      const charSelector = chars
+        .filter((char) => char.name.includes(userInput))
+        .map((char) => {
+          if (!char) {
+            return { name: "N/A", value: 0 };
+          }
+          const formattedCharName =
+            char.name.length > 100 ? char.name.slice(0, 94) + "..." : char.name;
+          return {
+            name: formattedCharName,
+            value: char.id,
+          };
+        });
       interaction.respond(charSelector);
     });
   };

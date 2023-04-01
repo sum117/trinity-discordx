@@ -6,11 +6,10 @@ import sharp from "sharp";
 import type { UserProfileProps } from "../types/interfaces";
 
 const robotoArrayBuffer = new Uint8Array(
-  fs.readFileSync("./src/util/Roboto-Regular.ttf"),
+  fs.readFileSync("./src/util/Roboto-Regular.ttf")
 ).buffer;
 
 export default async function main(user: UserProfileProps): Promise<Buffer> {
-
   const markup = __html`
     <main
       class="flex"

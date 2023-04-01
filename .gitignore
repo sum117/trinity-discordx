@@ -4,7 +4,7 @@
 .env.local
 package-lock.json
 yarn.lock
-prisma/dev.db
+dev.db
 
 # folders
 build

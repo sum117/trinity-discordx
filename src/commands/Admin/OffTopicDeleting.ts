@@ -67,7 +67,7 @@ export class Admin {
   public async onOffTopicMessage([
     message,
   ]: ArgsOf<"messageCreate">): Promise<void> {
-    if (message.channel.isTextBased()) {
+    if (message.channel.isTextBased?.()) {
       const offTopic =
         message.content.startsWith("/") ||
         message.content.startsWith("\\") ||

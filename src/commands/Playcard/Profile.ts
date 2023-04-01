@@ -124,7 +124,10 @@ export class Playcard {
     const likedChar = await characters.addLike(charId, interaction.user.id);
     if (!likedChar) {
       return interaction.followUp({
-        content: `<@${interaction.user.id}> ` + i18n.__({ locale, phrase: "errorMessage.alreadyLiked" }) + `: ${character.name}`,
+        content:
+          `<@${interaction.user.id}> ` +
+          i18n.__({ locale, phrase: "errorMessage.alreadyLiked" }) +
+          `: ${character.name}`,
       });
     }
     const embed = new CharEmbedBuilder(interaction.user, likedChar).profile(
@@ -135,7 +138,10 @@ export class Playcard {
       .replace("{character}", character.name)
       .replace("{user}", userMention(character.authorId));
     await interaction.followUp({
-      content: `<@${interaction.user.id}> ` + i18n.__({ locale, phrase: "feedback.characterLiked" }) + `: ${character.name}`,
+      content:
+        `<@${interaction.user.id}> ` +
+        i18n.__({ locale, phrase: "feedback.characterLiked" }) +
+        `: ${character.name}`,
       ephemeral: false,
     });
     return interaction.editReply({
